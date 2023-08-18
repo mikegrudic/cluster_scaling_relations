@@ -15,9 +15,15 @@ The compilation includes star cluster masses, ages, radii, and - where possible 
 # Data fields
 
 `Mass`: Cluster mass in solar
+
 `Reff`: Cluster half-light radius in pc
+
 `error_logReff`: Statistical error in half-light radius in dex (symmetrized if the original was asymmetric, as in Brown & Gnedin 2021)
+
 `Rgc`: Galactocentric radius in kpc
+
 `Region`: Galactic region label
+
 `Vcirc`: Circular velocity at cluster galactocentric radius in km/s
+
 `Omega`: Circular orbital frequency Vcirc/Rgc in km/s/kpc
