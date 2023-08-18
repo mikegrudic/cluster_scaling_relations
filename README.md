@@ -16,6 +16,8 @@ The data compilation procedure can be reproduced in Cluster_Compilation.py
 
 # Data fields
 
+`Reference`: ADS bibcodes of the papers that the cluster and galactic data came from - PLEASE LOOK AT THESE AND CITE WITH APPROPRIATE CREDIT
+
 `Mass`: Cluster mass in solar
 
 `Reff`: Cluster half-light radius in pc
