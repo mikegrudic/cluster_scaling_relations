@@ -1,0 +1,1208 @@
+# %ECSV 1.0
+# ---
+# datatype:
+# - {name: ID, datatype: float64, format: .0f, description: Annulus ID}
+# - {name: r_gal, unit: kpc, datatype: float64, format: .2f, description: Deprojected galactocentric radius}
+# - {name: frac_area_center, datatype: float64, format: .3f, description: Fraction of area in the central region}
+# - {name: frac_area_bars, datatype: float64, format: .3f, description: Fraction of area in the bar region}
+# - {name: frac_area_sp_arms, datatype: float64, format: .3f, description: Fraction of area in the spiral arm region}
+# - {name: frac_CO21_center, datatype: float64, format: .3f, description: Fraction of CO21 flux in the central region}
+# - {name: frac_CO21_bars, datatype: float64, format: .3f, description: Fraction of CO21 flux in the bar region}
+# - {name: frac_CO21_sp_arms, datatype: float64, format: .3f, description: Fraction of CO21 flux in the spiral arm region}
+# - {name: frac_Halpha_center, datatype: float64, format: .3f, description: Fraction of Halpha flux in the central region}
+# - {name: frac_Halpha_bars, datatype: float64, format: .3f, description: Fraction of Halpha flux in the bar region}
+# - {name: frac_Halpha_sp_arms, datatype: float64, format: .3f, description: Fraction of Halpha flux in the spiral arm region}
+# - {name: V_circ_CO21_URC, unit: km / s, datatype: float64, format: .3e, description: Circular velocity (CO21; Persic+96 universal model)}
+# - {name: e_V_circ_CO21_URC, unit: km / s, datatype: float64, format: .1e, description: Stats error on circular velocity (CO21; Persic+96
+#     universal model)}
+# - {name: beta_CO21_URC, datatype: float64, format: .3e, description: Log derivative of rotation curve (CO21; Persic+96 universal model)}
+# - {name: e_beta_CO21_URC, datatype: float64, format: .1e, description: Stats error on log derivative of rotation curve (CO21; Persic+96
+#     universal model)}
+# - {name: Zprime, datatype: float64, format: .3e, description: Gas-phase metallicity relative to solar (fiducial)}
+# - {name: alpha_CO21_S20, unit: s solMass / (K km pc2), datatype: float64, format: .3e, description: CO(2-1)-to-H2 conversion factor
+#     (Sun+20 Zprime-based power law)}
+# - {name: alpha_CO21_Galactic, unit: s solMass / (K km pc2), datatype: float64, format: .3e, description: CO(2-1)-to-H2 conversion factor
+#     (Galactic value)}
+# - {name: alpha_CO21_N12, unit: s solMass / (K km pc2), datatype: float64, format: .3e, description: CO(2-1)-to-H2 conversion factor
+#     (Narayanan+12 prescription)}
+# - {name: alpha_CO21_B13, unit: s solMass / (K km pc2), datatype: float64, format: .3e, description: CO(2-1)-to-H2 conversion factor
+#     (Bolatto+13 prescription)}
+# - {name: <alpha_CO21_G20ICO_60pc>, unit: s solMass / (K km pc2), datatype: float64, format: .3e, description: 'FLux-weighted mean CO(2-1)-to-H2
+#     conversion factor (Gong+20 ICO-based, 60 pc resolution)'}
+# - {name: <alpha_CO21_G20ICO_90pc>, unit: s solMass / (K km pc2), datatype: float64, format: .3e, description: 'FLux-weighted mean CO(2-1)-to-H2
+#     conversion factor (Gong+20 ICO-based, 90 pc resolution)'}
+# - {name: <alpha_CO21_G20ICO_120pc>, unit: s solMass / (K km pc2), datatype: float64, format: .3e, description: 'FLux-weighted mean CO(2-1)-to-H2
+#     conversion factor (Gong+20 ICO-based, 120 pc resolution)'}
+# - {name: <alpha_CO21_G20ICO_150pc>, unit: s solMass / (K km pc2), datatype: float64, format: .3e, description: 'FLux-weighted mean CO(2-1)-to-H2
+#     conversion factor (Gong+20 ICO-based, 150 pc resolution)'}
+# - {name: Sigma_mol, unit: solMass / pc2, datatype: float64, format: .3e, description: Region-average molecular gas surface density (S20
+#     alphaCO)}
+# - {name: e_Sigma_mol, unit: solMass / pc2, datatype: float64, format: .1e, description: Stats error on region-average molecular gas
+#     surface density (S20 alphaCO)}
+# - {name: Sigma_atom, unit: solMass / pc2, datatype: float64, format: .3e, description: Region-average atomic gas surface density (PHANGS-HI)}
+# - {name: e_Sigma_atom, unit: solMass / pc2, datatype: float64, format: .1e, description: Stats error on region-average atomic gas surface
+#     density (PHANGS-HI)}
+# - {name: MtoL_3p4um, unit: solMass / solLum, datatype: float64, format: .3e, description: Stellar mass-to-light ratio at 3.4um (fiducial)}
+# - {name: MtoL_3p4um_SFRW1, unit: solMass / solLum, datatype: float64, format: .3e, description: Stellar mass-to-light ratio at 3.4um
+#     (SFR-to-WISE1 color; Leroy+21)}
+# - {name: MtoL_3p4um_W4W1, unit: solMass / solLum, datatype: float64, format: .3e, description: Stellar mass-to-light ratio at 3.4um
+#     (WISE4-to-WISE1 color; Leroy+21)}
+# - {name: Sigma_star, unit: solMass / pc2, datatype: float64, format: .3e, description: Region-average stellar mass surface density (fiducial)}
+# - {name: e_Sigma_star, unit: solMass / pc2, datatype: float64, format: .1e, description: Stats error on region-average stellar mass
+#     surface density (fiducial)}
+# - {name: Sigma_star_3p6um, unit: solMass / pc2, datatype: float64, format: .3e, description: Region-average stellar mass surface density
+#     (3.6um + varying M/L; Leroy+21)}
+# - {name: e_Sigma_star_3p6um, unit: solMass / pc2, datatype: float64, format: .1e, description: Stats error on region-average stellar
+#     mass surface density (3.6um + varying M/L; Leroy+21)}
+# - {name: Sigma_star_3p4um, unit: solMass / pc2, datatype: float64, format: .3e, description: Region-average stellar mass surface density
+#     (3.4um + varying M/L; Leroy+21)}
+# - {name: e_Sigma_star_3p4um, unit: solMass / pc2, datatype: float64, format: .1e, description: Stats error on region-average stellar
+#     mass surface density (3.4um + varying M/L; Leroy+21)}
+# - {name: rho_star_mp, unit: solMass / pc3, datatype: float64, format: .3e, description: Region-average stellar mass volume density near
+#     disk mid-plane}
+# - {name: e_rho_star_mp, unit: solMass / pc3, datatype: float64, format: .1e, description: Stats error on region-average stellar mass
+#     volume density near disk mid-plane}
+# - {name: Sigma_SFR_HaW4recal, unit: solMass / (kpc2 yr), datatype: float64, format: .3e, description: Region-average SFR surface density
+#     (recalibrated Halpha + WISE4; Belfiore+22)}
+# - {name: e_Sigma_SFR_HaW4recal, unit: solMass / (kpc2 yr), datatype: float64, format: .1e, description: Stats error on region-average
+#     SFR surface density (recalibrated Halpha + WISE4; Belfiore+22)}
+# - {name: Sigma_SFR_FUVW4recal, unit: solMass / (kpc2 yr), datatype: float64, format: .3e, description: Region-average SFR surface density
+#     (recalibrated GALEX FUV + WISE4; Belfiore+22)}
+# - {name: e_Sigma_SFR_FUVW4recal, unit: solMass / (kpc2 yr), datatype: float64, format: .1e, description: Stats error on region-average
+#     SFR surface density (recalibrated GALEX FUV + WISE4; Belfiore+22)}
+# - {name: Sigma_SFR_Hacorr, unit: solMass / (kpc2 yr), datatype: float64, format: .3e, description: Region-average SFR surface density
+#     (Av-corrected Halpha; Belfiore+22)}
+# - {name: e_Sigma_SFR_Hacorr, unit: solMass / (kpc2 yr), datatype: float64, format: .1e, description: Stats error on region-average SFR
+#     surface density (Av-corrected Halpha; Belfiore+22)}
+# - {name: Sigma_SFR_HaW4, unit: solMass / (kpc2 yr), datatype: float64, format: .3e, description: Region-average SFR surface density
+#     (Halpha + WISE4; Calzetti+07; Murphy+11)}
+# - {name: e_Sigma_SFR_HaW4, unit: solMass / (kpc2 yr), datatype: float64, format: .1e, description: Stats error on region-average SFR
+#     surface density (Halpha + WISE4; Calzetti+07; Murphy+11)}
+# - {name: Sigma_SFR_FUVW4, unit: solMass / (kpc2 yr), datatype: float64, format: .3e, description: Region-average SFR surface density
+#     (GALEX FUV + WISE4; Leroy+19)}
+# - {name: e_Sigma_SFR_FUVW4, unit: solMass / (kpc2 yr), datatype: float64, format: .1e, description: Stats error on region-average SFR
+#     surface density (GALEX FUV + WISE4; Leroy+19)}
+# - {name: Sigma_SFR_NUVW4, unit: solMass / (kpc2 yr), datatype: float64, format: .3e, description: Region-average SFR surface density
+#     (GALEX NUV + WISE4; Leroy+19)}
+# - {name: e_Sigma_SFR_NUVW4, unit: solMass / (kpc2 yr), datatype: float64, format: .1e, description: Stats error on region-average SFR
+#     surface density (GALEX NUV + WISE4; Leroy+19)}
+# - {name: Sigma_SFR_W4ONLY, unit: solMass / (kpc2 yr), datatype: float64, format: .3e, description: Region-average SFR surface density
+#     (WISE4 only; Leroy+19)}
+# - {name: e_Sigma_SFR_W4ONLY, unit: solMass / (kpc2 yr), datatype: float64, format: .1e, description: Stats error on region-average SFR
+#     surface density (WISE4 only; Leroy+19)}
+# - {name: fracA_CO21_pix_60pc, datatype: float64, format: .3f, description: Area filling fraction of CO21 detection @ 60 pc resolution}
+# - {name: fracF_CO21_pix_60pc, datatype: float64, format: .3f, description: Flux completeness of CO21 detection @ 60 pc resolution}
+# - {name: corr_I_CO21_pix_60pc, datatype: float64, format: .3e, description: Completeness correction on flux-weighted mean CO21 intensity
+#     @ 60 pc resolution}
+# - {name: corr_c_CO21_pix_60pc, datatype: float64, format: .3e, description: Completeness correction on CO21 clumping factor @ 60 pc
+#     resolution}
+# - {name: corr_t_ff^-1_pix_60pc, datatype: float64, format: .3e, description: Completeness correction on inverse free-fall time @ 60
+#     pc resolution}
+# - {name: c_CO21_pix_60pc, datatype: float64, format: .3e, description: Clumping factor of CO21 emission @ 60 pc resolution}
+# - {name: e_c_CO21_pix_60pc, datatype: float64, format: .1e, description: Stats error on clumping factor of CO21 emission @ 60 pc resolution}
+# - {name: <Sigma_mol_pix_60pc>, unit: solMass / pc2, datatype: float64, format: .3e, description: Flux-weighted mean molecular gas surface
+#     density @ 60 pc resolution}
+# - {name: e_<Sigma_mol_pix_60pc>, unit: solMass / pc2, datatype: float64, format: .1e, description: Stats error on flux-weighted mean
+#     molecular gas surface density @ 60 pc resolution}
+# - {name: <vdisp_mol_pix_60pc>, unit: km / s, datatype: float64, format: .3e, description: Flux-weighted mean molecular gas velocity
+#     dispersion @ 60 pc resolution}
+# - {name: e_<vdisp_mol_pix_60pc>, unit: km / s, datatype: float64, format: .1e, description: Stats error on flux-weighted mean molecular
+#     gas velocity dispersion @ 60 pc resolution}
+# - {name: <P_turb_pix_60pc>, unit: K / cm3, datatype: float64, format: .3e, description: Flux-weighted mean molecular gas turbulent pressure
+#     @ 60 pc resolution}
+# - {name: e_<P_turb_pix_60pc>, unit: K / cm3, datatype: float64, format: .1e, description: Stats error on flux-weighted mean molecular
+#     gas turbulent pressure @ 60 pc resolution}
+# - {name: <alpha_vir_pix_60pc>, datatype: float64, format: .3e, description: Flux-weighted mean virial parameter @ 60 pc resolution}
+# - {name: e_<alpha_vir_pix_60pc>, datatype: float64, format: .1e, description: Stats error on flux-weighted mean virial parameter @ 60
+#     pc resolution}
+# - {name: <t_cross^-1_pix_60pc>, unit: 1 / Myr, datatype: float64, format: .3e, description: Flux-weighted mean reciprocal of crossing
+#     time @ 60 pc resolution}
+# - {name: e_<t_cross^-1_pix_60pc>, unit: 1 / Myr, datatype: float64, format: .1e, description: Stats error on flux-weighted mean reciprocal
+#     of crossing time @ 60 pc resolution}
+# - {name: <t_ff^-1_pix_60pc>, unit: 1 / Myr, datatype: float64, format: .3e, description: Flux-weighted mean reciprocal of free-fall
+#     time @ 60 pc resolution}
+# - {name: e_<t_ff^-1_pix_60pc>, unit: 1 / Myr, datatype: float64, format: .1e, description: Stats error on flux-weighted mean reciprocal
+#     of free-fall time @ 60 pc resolution}
+# - {name: N_obj_60pc, datatype: float64, format: .0f, description: Number of CPROPS objects in each aperture @ 60 pc resolution}
+# - {name: fracF_CO21_obj_60pc, datatype: float64, format: .3f, description: Flux completeness of CPROPS objects @ 60 pc resolution}
+# - {name: <M_mol_obj_60pc>, unit: solMass, datatype: float64, format: .3e, description: Flux-weighted mean object molecular gas mass
+#     @ 60 pc resolution}
+# - {name: e_<M_mol_obj_60pc>, unit: solMass, datatype: float64, format: .1e, description: Stats error on flux-weighted mean object molecular
+#     gas mass @ 60 pc resolution}
+# - {name: <Sigma_mol_obj_60pc>, unit: solMass / pc2, datatype: float64, format: .3e, description: Flux-weighted mean object molecular
+#     gas surface density @ 60 pc resolution}
+# - {name: e_<Sigma_mol_obj_60pc>, unit: solMass / pc2, datatype: float64, format: .1e, description: Stats error on flux-weighted mean
+#     object molecular gas surface density @ 60 pc resolution}
+# - {name: <vdisp_mol_obj_60pc>, unit: km / s, datatype: float64, format: .3e, description: Flux-weighted mean object velocity dispersion
+#     @ 60 pc resolution}
+# - {name: e_<vdisp_mol_obj_60pc>, unit: km / s, datatype: float64, format: .1e, description: Stats error on flux-weighted mean object
+#     velocity dispersion @ 60 pc resolution}
+# - {name: <R_3d_obj_60pc>, unit: pc, datatype: float64, format: .3e, description: Flux-weighted mean object radius (3d spheroid) @ 60
+#     pc resolution}
+# - {name: e_<R_3d_obj_60pc>, unit: pc, datatype: float64, format: .1e, description: Stats error on flux-weighted mean object radius (3d
+#     spheroid) @ 60 pc resolution}
+# - {name: <P_turb_obj_60pc>, unit: K / cm3, datatype: float64, format: .3e, description: Flux-weighted mean object molecular gas turbulent
+#     pressure @ 60 pc resolution}
+# - {name: e_<P_turb_obj_60pc>, unit: K / cm3, datatype: float64, format: .1e, description: Stats error on flux-weighted mean object molecular
+#     gas turbulent pressure @ 60 pc resolution}
+# - {name: <alpha_vir_obj_60pc>, datatype: float64, format: .3e, description: Flux-weighted mean object virial parameter @ 60 pc resolution}
+# - {name: e_<alpha_vir_obj_60pc>, datatype: float64, format: .1e, description: Stats error on flux-weighted mean object virial parameter
+#     @ 60 pc resolution}
+# - {name: <t_cross^-1_obj_60pc>, unit: 1 / Myr, datatype: float64, format: .3e, description: Flux-weighted mean reciprocal of object
+#     crossing time @ 60 pc resolution}
+# - {name: e_<t_cross^-1_obj_60pc>, unit: 1 / Myr, datatype: float64, format: .1e, description: Stats error on flux-weighted mean reciprocal
+#     of object crossing time @ 60 pc resolution}
+# - {name: <t_ff^-1_obj_60pc>, unit: 1 / Myr, datatype: float64, format: .3e, description: Flux-weighted mean reciprocal of object free-fall
+#     time @ 60 pc resolution}
+# - {name: e_<t_ff^-1_obj_60pc>, unit: 1 / Myr, datatype: float64, format: .1e, description: Stats error on flux-weighted mean reciprocal
+#     of object free-fall time @ 60 pc resolution}
+# - {name: fracA_CO21_pix_90pc, datatype: float64, format: .3f, description: Area filling fraction of CO21 detection @ 90 pc resolution}
+# - {name: fracF_CO21_pix_90pc, datatype: float64, format: .3f, description: Flux completeness of CO21 detection @ 90 pc resolution}
+# - {name: corr_I_CO21_pix_90pc, datatype: float64, format: .3e, description: Completeness correction on flux-weighted mean CO21 intensity
+#     @ 90 pc resolution}
+# - {name: corr_c_CO21_pix_90pc, datatype: float64, format: .3e, description: Completeness correction on CO21 clumping factor @ 90 pc
+#     resolution}
+# - {name: corr_t_ff^-1_pix_90pc, datatype: float64, format: .3e, description: Completeness correction on inverse free-fall time @ 90
+#     pc resolution}
+# - {name: c_CO21_pix_90pc, datatype: float64, format: .3e, description: Clumping factor of CO21 emission @ 90 pc resolution}
+# - {name: e_c_CO21_pix_90pc, datatype: float64, format: .1e, description: Stats error on clumping factor of CO21 emission @ 90 pc resolution}
+# - {name: <Sigma_mol_pix_90pc>, unit: solMass / pc2, datatype: float64, format: .3e, description: Flux-weighted mean molecular gas surface
+#     density @ 90 pc resolution}
+# - {name: e_<Sigma_mol_pix_90pc>, unit: solMass / pc2, datatype: float64, format: .1e, description: Stats error on flux-weighted mean
+#     molecular gas surface density @ 90 pc resolution}
+# - {name: <vdisp_mol_pix_90pc>, unit: km / s, datatype: float64, format: .3e, description: Flux-weighted mean molecular gas velocity
+#     dispersion @ 90 pc resolution}
+# - {name: e_<vdisp_mol_pix_90pc>, unit: km / s, datatype: float64, format: .1e, description: Stats error on flux-weighted mean molecular
+#     gas velocity dispersion @ 90 pc resolution}
+# - {name: <P_turb_pix_90pc>, unit: K / cm3, datatype: float64, format: .3e, description: Flux-weighted mean molecular gas turbulent pressure
+#     @ 90 pc resolution}
+# - {name: e_<P_turb_pix_90pc>, unit: K / cm3, datatype: float64, format: .1e, description: Stats error on flux-weighted mean molecular
+#     gas turbulent pressure @ 90 pc resolution}
+# - {name: <alpha_vir_pix_90pc>, datatype: float64, format: .3e, description: Flux-weighted mean virial parameter @ 90 pc resolution}
+# - {name: e_<alpha_vir_pix_90pc>, datatype: float64, format: .1e, description: Stats error on flux-weighted mean virial parameter @ 90
+#     pc resolution}
+# - {name: <t_cross^-1_pix_90pc>, unit: 1 / Myr, datatype: float64, format: .3e, description: Flux-weighted mean reciprocal of crossing
+#     time @ 90 pc resolution}
+# - {name: e_<t_cross^-1_pix_90pc>, unit: 1 / Myr, datatype: float64, format: .1e, description: Stats error on flux-weighted mean reciprocal
+#     of crossing time @ 90 pc resolution}
+# - {name: <t_ff^-1_pix_90pc>, unit: 1 / Myr, datatype: float64, format: .3e, description: Flux-weighted mean reciprocal of free-fall
+#     time @ 90 pc resolution}
+# - {name: e_<t_ff^-1_pix_90pc>, unit: 1 / Myr, datatype: float64, format: .1e, description: Stats error on flux-weighted mean reciprocal
+#     of free-fall time @ 90 pc resolution}
+# - {name: N_obj_90pc, datatype: float64, format: .0f, description: Number of CPROPS objects in each aperture @ 90 pc resolution}
+# - {name: fracF_CO21_obj_90pc, datatype: float64, format: .3f, description: Flux completeness of CPROPS objects @ 90 pc resolution}
+# - {name: <M_mol_obj_90pc>, unit: solMass, datatype: float64, format: .3e, description: Flux-weighted mean object molecular gas mass
+#     @ 90 pc resolution}
+# - {name: e_<M_mol_obj_90pc>, unit: solMass, datatype: float64, format: .1e, description: Stats error on flux-weighted mean object molecular
+#     gas mass @ 90 pc resolution}
+# - {name: <Sigma_mol_obj_90pc>, unit: solMass / pc2, datatype: float64, format: .3e, description: Flux-weighted mean object molecular
+#     gas surface density @ 90 pc resolution}
+# - {name: e_<Sigma_mol_obj_90pc>, unit: solMass / pc2, datatype: float64, format: .1e, description: Stats error on flux-weighted mean
+#     object molecular gas surface density @ 90 pc resolution}
+# - {name: <vdisp_mol_obj_90pc>, unit: km / s, datatype: float64, format: .3e, description: Flux-weighted mean object velocity dispersion
+#     @ 90 pc resolution}
+# - {name: e_<vdisp_mol_obj_90pc>, unit: km / s, datatype: float64, format: .1e, description: Stats error on flux-weighted mean object
+#     velocity dispersion @ 90 pc resolution}
+# - {name: <R_3d_obj_90pc>, unit: pc, datatype: float64, format: .3e, description: Flux-weighted mean object radius (3d spheroid) @ 90
+#     pc resolution}
+# - {name: e_<R_3d_obj_90pc>, unit: pc, datatype: float64, format: .1e, description: Stats error on flux-weighted mean object radius (3d
+#     spheroid) @ 90 pc resolution}
+# - {name: <P_turb_obj_90pc>, unit: K / cm3, datatype: float64, format: .3e, description: Flux-weighted mean object molecular gas turbulent
+#     pressure @ 90 pc resolution}
+# - {name: e_<P_turb_obj_90pc>, unit: K / cm3, datatype: float64, format: .1e, description: Stats error on flux-weighted mean object molecular
+#     gas turbulent pressure @ 90 pc resolution}
+# - {name: <alpha_vir_obj_90pc>, datatype: float64, format: .3e, description: Flux-weighted mean object virial parameter @ 90 pc resolution}
+# - {name: e_<alpha_vir_obj_90pc>, datatype: float64, format: .1e, description: Stats error on flux-weighted mean object virial parameter
+#     @ 90 pc resolution}
+# - {name: <t_cross^-1_obj_90pc>, unit: 1 / Myr, datatype: float64, format: .3e, description: Flux-weighted mean reciprocal of object
+#     crossing time @ 90 pc resolution}
+# - {name: e_<t_cross^-1_obj_90pc>, unit: 1 / Myr, datatype: float64, format: .1e, description: Stats error on flux-weighted mean reciprocal
+#     of object crossing time @ 90 pc resolution}
+# - {name: <t_ff^-1_obj_90pc>, unit: 1 / Myr, datatype: float64, format: .3e, description: Flux-weighted mean reciprocal of object free-fall
+#     time @ 90 pc resolution}
+# - {name: e_<t_ff^-1_obj_90pc>, unit: 1 / Myr, datatype: float64, format: .1e, description: Stats error on flux-weighted mean reciprocal
+#     of object free-fall time @ 90 pc resolution}
+# - {name: fracA_CO21_pix_120pc, datatype: float64, format: .3f, description: Area filling fraction of CO21 detection @ 120 pc resolution}
+# - {name: fracF_CO21_pix_120pc, datatype: float64, format: .3f, description: Flux completeness of CO21 detection @ 120 pc resolution}
+# - {name: corr_I_CO21_pix_120pc, datatype: float64, format: .3e, description: Completeness correction on flux-weighted mean CO21 intensity
+#     @ 120 pc resolution}
+# - {name: corr_c_CO21_pix_120pc, datatype: float64, format: .3e, description: Completeness correction on CO21 clumping factor @ 120 pc
+#     resolution}
+# - {name: corr_t_ff^-1_pix_120pc, datatype: float64, format: .3e, description: Completeness correction on inverse free-fall time @ 120
+#     pc resolution}
+# - {name: c_CO21_pix_120pc, datatype: float64, format: .3e, description: Clumping factor of CO21 emission @ 120 pc resolution}
+# - {name: e_c_CO21_pix_120pc, datatype: float64, format: .1e, description: Stats error on clumping factor of CO21 emission @ 120 pc resolution}
+# - {name: <Sigma_mol_pix_120pc>, unit: solMass / pc2, datatype: float64, format: .3e, description: Flux-weighted mean molecular gas surface
+#     density @ 120 pc resolution}
+# - {name: e_<Sigma_mol_pix_120pc>, unit: solMass / pc2, datatype: float64, format: .1e, description: Stats error on flux-weighted mean
+#     molecular gas surface density @ 120 pc resolution}
+# - {name: <vdisp_mol_pix_120pc>, unit: km / s, datatype: float64, format: .3e, description: Flux-weighted mean molecular gas velocity
+#     dispersion @ 120 pc resolution}
+# - {name: e_<vdisp_mol_pix_120pc>, unit: km / s, datatype: float64, format: .1e, description: Stats error on flux-weighted mean molecular
+#     gas velocity dispersion @ 120 pc resolution}
+# - {name: <P_turb_pix_120pc>, unit: K / cm3, datatype: float64, format: .3e, description: Flux-weighted mean molecular gas turbulent
+#     pressure @ 120 pc resolution}
+# - {name: e_<P_turb_pix_120pc>, unit: K / cm3, datatype: float64, format: .1e, description: Stats error on flux-weighted mean molecular
+#     gas turbulent pressure @ 120 pc resolution}
+# - {name: <alpha_vir_pix_120pc>, datatype: float64, format: .3e, description: Flux-weighted mean virial parameter @ 120 pc resolution}
+# - {name: e_<alpha_vir_pix_120pc>, datatype: float64, format: .1e, description: Stats error on flux-weighted mean virial parameter @
+#     120 pc resolution}
+# - {name: <t_cross^-1_pix_120pc>, unit: 1 / Myr, datatype: float64, format: .3e, description: Flux-weighted mean reciprocal of crossing
+#     time @ 120 pc resolution}
+# - {name: e_<t_cross^-1_pix_120pc>, unit: 1 / Myr, datatype: float64, format: .1e, description: Stats error on flux-weighted mean reciprocal
+#     of crossing time @ 120 pc resolution}
+# - {name: <t_ff^-1_pix_120pc>, unit: 1 / Myr, datatype: float64, format: .3e, description: Flux-weighted mean reciprocal of free-fall
+#     time @ 120 pc resolution}
+# - {name: e_<t_ff^-1_pix_120pc>, unit: 1 / Myr, datatype: float64, format: .1e, description: Stats error on flux-weighted mean reciprocal
+#     of free-fall time @ 120 pc resolution}
+# - {name: N_obj_120pc, datatype: float64, format: .0f, description: Number of CPROPS objects in each aperture @ 120 pc resolution}
+# - {name: fracF_CO21_obj_120pc, datatype: float64, format: .3f, description: Flux completeness of CPROPS objects @ 120 pc resolution}
+# - {name: <M_mol_obj_120pc>, unit: solMass, datatype: float64, format: .3e, description: Flux-weighted mean object molecular gas mass
+#     @ 120 pc resolution}
+# - {name: e_<M_mol_obj_120pc>, unit: solMass, datatype: float64, format: .1e, description: Stats error on flux-weighted mean object molecular
+#     gas mass @ 120 pc resolution}
+# - {name: <Sigma_mol_obj_120pc>, unit: solMass / pc2, datatype: float64, format: .3e, description: Flux-weighted mean object molecular
+#     gas surface density @ 120 pc resolution}
+# - {name: e_<Sigma_mol_obj_120pc>, unit: solMass / pc2, datatype: float64, format: .1e, description: Stats error on flux-weighted mean
+#     object molecular gas surface density @ 120 pc resolution}
+# - {name: <vdisp_mol_obj_120pc>, unit: km / s, datatype: float64, format: .3e, description: Flux-weighted mean object velocity dispersion
+#     @ 120 pc resolution}
+# - {name: e_<vdisp_mol_obj_120pc>, unit: km / s, datatype: float64, format: .1e, description: Stats error on flux-weighted mean object
+#     velocity dispersion @ 120 pc resolution}
+# - {name: <R_3d_obj_120pc>, unit: pc, datatype: float64, format: .3e, description: Flux-weighted mean object radius (3d spheroid) @ 120
+#     pc resolution}
+# - {name: e_<R_3d_obj_120pc>, unit: pc, datatype: float64, format: .1e, description: Stats error on flux-weighted mean object radius
+#     (3d spheroid) @ 120 pc resolution}
+# - {name: <P_turb_obj_120pc>, unit: K / cm3, datatype: float64, format: .3e, description: Flux-weighted mean object molecular gas turbulent
+#     pressure @ 120 pc resolution}
+# - {name: e_<P_turb_obj_120pc>, unit: K / cm3, datatype: float64, format: .1e, description: Stats error on flux-weighted mean object
+#     molecular gas turbulent pressure @ 120 pc resolution}
+# - {name: <alpha_vir_obj_120pc>, datatype: float64, format: .3e, description: Flux-weighted mean object virial parameter @ 120 pc resolution}
+# - {name: e_<alpha_vir_obj_120pc>, datatype: float64, format: .1e, description: Stats error on flux-weighted mean object virial parameter
+#     @ 120 pc resolution}
+# - {name: <t_cross^-1_obj_120pc>, unit: 1 / Myr, datatype: float64, format: .3e, description: Flux-weighted mean reciprocal of object
+#     crossing time @ 120 pc resolution}
+# - {name: e_<t_cross^-1_obj_120pc>, unit: 1 / Myr, datatype: float64, format: .1e, description: Stats error on flux-weighted mean reciprocal
+#     of object crossing time @ 120 pc resolution}
+# - {name: <t_ff^-1_obj_120pc>, unit: 1 / Myr, datatype: float64, format: .3e, description: Flux-weighted mean reciprocal of object free-fall
+#     time @ 120 pc resolution}
+# - {name: e_<t_ff^-1_obj_120pc>, unit: 1 / Myr, datatype: float64, format: .1e, description: Stats error on flux-weighted mean reciprocal
+#     of object free-fall time @ 120 pc resolution}
+# - {name: fracA_CO21_pix_150pc, datatype: float64, format: .3f, description: Area filling fraction of CO21 detection @ 150 pc resolution}
+# - {name: fracF_CO21_pix_150pc, datatype: float64, format: .3f, description: Flux completeness of CO21 detection @ 150 pc resolution}
+# - {name: corr_I_CO21_pix_150pc, datatype: float64, format: .3e, description: Completeness correction on flux-weighted mean CO21 intensity
+#     @ 150 pc resolution}
+# - {name: corr_c_CO21_pix_150pc, datatype: float64, format: .3e, description: Completeness correction on CO21 clumping factor @ 150 pc
+#     resolution}
+# - {name: corr_t_ff^-1_pix_150pc, datatype: float64, format: .3e, description: Completeness correction on inverse free-fall time @ 150
+#     pc resolution}
+# - {name: c_CO21_pix_150pc, datatype: float64, format: .3e, description: Clumping factor of CO21 emission @ 150 pc resolution}
+# - {name: e_c_CO21_pix_150pc, datatype: float64, format: .1e, description: Stats error on clumping factor of CO21 emission @ 150 pc resolution}
+# - {name: <Sigma_mol_pix_150pc>, unit: solMass / pc2, datatype: float64, format: .3e, description: Flux-weighted mean molecular gas surface
+#     density @ 150 pc resolution}
+# - {name: e_<Sigma_mol_pix_150pc>, unit: solMass / pc2, datatype: float64, format: .1e, description: Stats error on flux-weighted mean
+#     molecular gas surface density @ 150 pc resolution}
+# - {name: <vdisp_mol_pix_150pc>, unit: km / s, datatype: float64, format: .3e, description: Flux-weighted mean molecular gas velocity
+#     dispersion @ 150 pc resolution}
+# - {name: e_<vdisp_mol_pix_150pc>, unit: km / s, datatype: float64, format: .1e, description: Stats error on flux-weighted mean molecular
+#     gas velocity dispersion @ 150 pc resolution}
+# - {name: <P_turb_pix_150pc>, unit: K / cm3, datatype: float64, format: .3e, description: Flux-weighted mean molecular gas turbulent
+#     pressure @ 150 pc resolution}
+# - {name: e_<P_turb_pix_150pc>, unit: K / cm3, datatype: float64, format: .1e, description: Stats error on flux-weighted mean molecular
+#     gas turbulent pressure @ 150 pc resolution}
+# - {name: <alpha_vir_pix_150pc>, datatype: float64, format: .3e, description: Flux-weighted mean virial parameter @ 150 pc resolution}
+# - {name: e_<alpha_vir_pix_150pc>, datatype: float64, format: .1e, description: Stats error on flux-weighted mean virial parameter @
+#     150 pc resolution}
+# - {name: <t_cross^-1_pix_150pc>, unit: 1 / Myr, datatype: float64, format: .3e, description: Flux-weighted mean reciprocal of crossing
+#     time @ 150 pc resolution}
+# - {name: e_<t_cross^-1_pix_150pc>, unit: 1 / Myr, datatype: float64, format: .1e, description: Stats error on flux-weighted mean reciprocal
+#     of crossing time @ 150 pc resolution}
+# - {name: <t_ff^-1_pix_150pc>, unit: 1 / Myr, datatype: float64, format: .3e, description: Flux-weighted mean reciprocal of free-fall
+#     time @ 150 pc resolution}
+# - {name: e_<t_ff^-1_pix_150pc>, unit: 1 / Myr, datatype: float64, format: .1e, description: Stats error on flux-weighted mean reciprocal
+#     of free-fall time @ 150 pc resolution}
+# - {name: N_obj_150pc, datatype: float64, format: .0f, description: Number of CPROPS objects in each aperture @ 150 pc resolution}
+# - {name: fracF_CO21_obj_150pc, datatype: float64, format: .3f, description: Flux completeness of CPROPS objects @ 150 pc resolution}
+# - {name: <M_mol_obj_150pc>, unit: solMass, datatype: float64, format: .3e, description: Flux-weighted mean object molecular gas mass
+#     @ 150 pc resolution}
+# - {name: e_<M_mol_obj_150pc>, unit: solMass, datatype: float64, format: .1e, description: Stats error on flux-weighted mean object molecular
+#     gas mass @ 150 pc resolution}
+# - {name: <Sigma_mol_obj_150pc>, unit: solMass / pc2, datatype: float64, format: .3e, description: Flux-weighted mean object molecular
+#     gas surface density @ 150 pc resolution}
+# - {name: e_<Sigma_mol_obj_150pc>, unit: solMass / pc2, datatype: float64, format: .1e, description: Stats error on flux-weighted mean
+#     object molecular gas surface density @ 150 pc resolution}
+# - {name: <vdisp_mol_obj_150pc>, unit: km / s, datatype: float64, format: .3e, description: Flux-weighted mean object velocity dispersion
+#     @ 150 pc resolution}
+# - {name: e_<vdisp_mol_obj_150pc>, unit: km / s, datatype: float64, format: .1e, description: Stats error on flux-weighted mean object
+#     velocity dispersion @ 150 pc resolution}
+# - {name: <R_3d_obj_150pc>, unit: pc, datatype: float64, format: .3e, description: Flux-weighted mean object radius (3d spheroid) @ 150
+#     pc resolution}
+# - {name: e_<R_3d_obj_150pc>, unit: pc, datatype: float64, format: .1e, description: Stats error on flux-weighted mean object radius
+#     (3d spheroid) @ 150 pc resolution}
+# - {name: <P_turb_obj_150pc>, unit: K / cm3, datatype: float64, format: .3e, description: Flux-weighted mean object molecular gas turbulent
+#     pressure @ 150 pc resolution}
+# - {name: e_<P_turb_obj_150pc>, unit: K / cm3, datatype: float64, format: .1e, description: Stats error on flux-weighted mean object
+#     molecular gas turbulent pressure @ 150 pc resolution}
+# - {name: <alpha_vir_obj_150pc>, datatype: float64, format: .3e, description: Flux-weighted mean object virial parameter @ 150 pc resolution}
+# - {name: e_<alpha_vir_obj_150pc>, datatype: float64, format: .1e, description: Stats error on flux-weighted mean object virial parameter
+#     @ 150 pc resolution}
+# - {name: <t_cross^-1_obj_150pc>, unit: 1 / Myr, datatype: float64, format: .3e, description: Flux-weighted mean reciprocal of object
+#     crossing time @ 150 pc resolution}
+# - {name: e_<t_cross^-1_obj_150pc>, unit: 1 / Myr, datatype: float64, format: .1e, description: Stats error on flux-weighted mean reciprocal
+#     of object crossing time @ 150 pc resolution}
+# - {name: <t_ff^-1_obj_150pc>, unit: 1 / Myr, datatype: float64, format: .3e, description: Flux-weighted mean reciprocal of object free-fall
+#     time @ 150 pc resolution}
+# - {name: e_<t_ff^-1_obj_150pc>, unit: 1 / Myr, datatype: float64, format: .1e, description: Stats error on flux-weighted mean reciprocal
+#     of object free-fall time @ 150 pc resolution}
+# delimiter: ','
+# meta: !!omap
+# - {TBLTYPE: RadialMegaTable}
+# - {RA_DEG: 26.928452}
+# - {DEC_DEG: -52.761978}
+# - {INCL_DEG: 23.0}
+# - {PA_DEG: 100.9}
+# - {RBIN_DEG: 0.001436704563152364}
+# - {RMAX_DEG: 0.037670393645854984}
+# - {GALAXY: NGC0685}
+# - {DIST_MPC: 19.94}
+# - {R25_KPC: 8.74}
+# - {RSCL_KPC: 3.08}
+# - {LOGMSTAR: 10.06}
+# - {TBLNOTE: PHANGS sample table v1.6; PHANGS-ALMA v4; PHANGS-ALMA CPROPS v4; PHANGS-ALMA rot. curve v1.0; PHANGS-MUSE v2.2; PHANGS-VLA
+#     v2.0; PHANGS-Halpha v2.3; PHANGS environ. mask v5.3}
+# - {VERSION: 4.0}
+# - {TIMESTMP: 'Fri Nov 11 02:50:52 2022'}
+# - __serialized_columns__:
+#     <M_mol_obj_120pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: &id001 !astropy.units.Unit {unit: solMass}
+#       value: !astropy.table.SerializedColumn {name: <M_mol_obj_120pc>}
+#     <M_mol_obj_150pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id001
+#       value: !astropy.table.SerializedColumn {name: <M_mol_obj_150pc>}
+#     <M_mol_obj_60pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id001
+#       value: !astropy.table.SerializedColumn {name: <M_mol_obj_60pc>}
+#     <M_mol_obj_90pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id001
+#       value: !astropy.table.SerializedColumn {name: <M_mol_obj_90pc>}
+#     <P_turb_obj_120pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: K / cm3}
+#       value: !astropy.table.SerializedColumn {name: <P_turb_obj_120pc>}
+#     <P_turb_obj_150pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: K / cm3}
+#       value: !astropy.table.SerializedColumn {name: <P_turb_obj_150pc>}
+#     <P_turb_obj_60pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: K / cm3}
+#       value: !astropy.table.SerializedColumn {name: <P_turb_obj_60pc>}
+#     <P_turb_obj_90pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: K / cm3}
+#       value: !astropy.table.SerializedColumn {name: <P_turb_obj_90pc>}
+#     <P_turb_pix_120pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: K / cm3}
+#       value: !astropy.table.SerializedColumn {name: <P_turb_pix_120pc>}
+#     <P_turb_pix_150pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: K / cm3}
+#       value: !astropy.table.SerializedColumn {name: <P_turb_pix_150pc>}
+#     <P_turb_pix_60pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: K / cm3}
+#       value: !astropy.table.SerializedColumn {name: <P_turb_pix_60pc>}
+#     <P_turb_pix_90pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: K / cm3}
+#       value: !astropy.table.SerializedColumn {name: <P_turb_pix_90pc>}
+#     <R_3d_obj_120pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: &id002 !astropy.units.Unit {unit: pc}
+#       value: !astropy.table.SerializedColumn {name: <R_3d_obj_120pc>}
+#     <R_3d_obj_150pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id002
+#       value: !astropy.table.SerializedColumn {name: <R_3d_obj_150pc>}
+#     <R_3d_obj_60pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id002
+#       value: !astropy.table.SerializedColumn {name: <R_3d_obj_60pc>}
+#     <R_3d_obj_90pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id002
+#       value: !astropy.table.SerializedColumn {name: <R_3d_obj_90pc>}
+#     <Sigma_mol_obj_120pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: solMass / pc2}
+#       value: !astropy.table.SerializedColumn {name: <Sigma_mol_obj_120pc>}
+#     <Sigma_mol_obj_150pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: solMass / pc2}
+#       value: !astropy.table.SerializedColumn {name: <Sigma_mol_obj_150pc>}
+#     <Sigma_mol_obj_60pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: solMass / pc2}
+#       value: !astropy.table.SerializedColumn {name: <Sigma_mol_obj_60pc>}
+#     <Sigma_mol_obj_90pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: solMass / pc2}
+#       value: !astropy.table.SerializedColumn {name: <Sigma_mol_obj_90pc>}
+#     <Sigma_mol_pix_120pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: solMass / pc2}
+#       value: !astropy.table.SerializedColumn {name: <Sigma_mol_pix_120pc>}
+#     <Sigma_mol_pix_150pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: solMass / pc2}
+#       value: !astropy.table.SerializedColumn {name: <Sigma_mol_pix_150pc>}
+#     <Sigma_mol_pix_60pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: solMass / pc2}
+#       value: !astropy.table.SerializedColumn {name: <Sigma_mol_pix_60pc>}
+#     <Sigma_mol_pix_90pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: solMass / pc2}
+#       value: !astropy.table.SerializedColumn {name: <Sigma_mol_pix_90pc>}
+#     <alpha_CO21_G20ICO_120pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: s solMass / (K km pc2)}
+#       value: !astropy.table.SerializedColumn {name: <alpha_CO21_G20ICO_120pc>}
+#     <alpha_CO21_G20ICO_150pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: s solMass / (K km pc2)}
+#       value: !astropy.table.SerializedColumn {name: <alpha_CO21_G20ICO_150pc>}
+#     <alpha_CO21_G20ICO_60pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: s solMass / (K km pc2)}
+#       value: !astropy.table.SerializedColumn {name: <alpha_CO21_G20ICO_60pc>}
+#     <alpha_CO21_G20ICO_90pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: s solMass / (K km pc2)}
+#       value: !astropy.table.SerializedColumn {name: <alpha_CO21_G20ICO_90pc>}
+#     <alpha_vir_obj_120pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: &id003 !astropy.units.Unit {unit: ''}
+#       value: !astropy.table.SerializedColumn {name: <alpha_vir_obj_120pc>}
+#     <alpha_vir_obj_150pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id003
+#       value: !astropy.table.SerializedColumn {name: <alpha_vir_obj_150pc>}
+#     <alpha_vir_obj_60pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id003
+#       value: !astropy.table.SerializedColumn {name: <alpha_vir_obj_60pc>}
+#     <alpha_vir_obj_90pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id003
+#       value: !astropy.table.SerializedColumn {name: <alpha_vir_obj_90pc>}
+#     <alpha_vir_pix_120pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id003
+#       value: !astropy.table.SerializedColumn {name: <alpha_vir_pix_120pc>}
+#     <alpha_vir_pix_150pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id003
+#       value: !astropy.table.SerializedColumn {name: <alpha_vir_pix_150pc>}
+#     <alpha_vir_pix_60pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id003
+#       value: !astropy.table.SerializedColumn {name: <alpha_vir_pix_60pc>}
+#     <alpha_vir_pix_90pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id003
+#       value: !astropy.table.SerializedColumn {name: <alpha_vir_pix_90pc>}
+#     <t_cross^-1_obj_120pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: 1 / Myr}
+#       value: !astropy.table.SerializedColumn {name: <t_cross^-1_obj_120pc>}
+#     <t_cross^-1_obj_150pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: 1 / Myr}
+#       value: !astropy.table.SerializedColumn {name: <t_cross^-1_obj_150pc>}
+#     <t_cross^-1_obj_60pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: 1 / Myr}
+#       value: !astropy.table.SerializedColumn {name: <t_cross^-1_obj_60pc>}
+#     <t_cross^-1_obj_90pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: 1 / Myr}
+#       value: !astropy.table.SerializedColumn {name: <t_cross^-1_obj_90pc>}
+#     <t_cross^-1_pix_120pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: 1 / Myr}
+#       value: !astropy.table.SerializedColumn {name: <t_cross^-1_pix_120pc>}
+#     <t_cross^-1_pix_150pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: 1 / Myr}
+#       value: !astropy.table.SerializedColumn {name: <t_cross^-1_pix_150pc>}
+#     <t_cross^-1_pix_60pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: 1 / Myr}
+#       value: !astropy.table.SerializedColumn {name: <t_cross^-1_pix_60pc>}
+#     <t_cross^-1_pix_90pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: 1 / Myr}
+#       value: !astropy.table.SerializedColumn {name: <t_cross^-1_pix_90pc>}
+#     <t_ff^-1_obj_120pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: 1 / Myr}
+#       value: !astropy.table.SerializedColumn {name: <t_ff^-1_obj_120pc>}
+#     <t_ff^-1_obj_150pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: 1 / Myr}
+#       value: !astropy.table.SerializedColumn {name: <t_ff^-1_obj_150pc>}
+#     <t_ff^-1_obj_60pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: 1 / Myr}
+#       value: !astropy.table.SerializedColumn {name: <t_ff^-1_obj_60pc>}
+#     <t_ff^-1_obj_90pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: 1 / Myr}
+#       value: !astropy.table.SerializedColumn {name: <t_ff^-1_obj_90pc>}
+#     <t_ff^-1_pix_120pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: 1 / Myr}
+#       value: !astropy.table.SerializedColumn {name: <t_ff^-1_pix_120pc>}
+#     <t_ff^-1_pix_150pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: 1 / Myr}
+#       value: !astropy.table.SerializedColumn {name: <t_ff^-1_pix_150pc>}
+#     <t_ff^-1_pix_60pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: 1 / Myr}
+#       value: !astropy.table.SerializedColumn {name: <t_ff^-1_pix_60pc>}
+#     <t_ff^-1_pix_90pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: 1 / Myr}
+#       value: !astropy.table.SerializedColumn {name: <t_ff^-1_pix_90pc>}
+#     <vdisp_mol_obj_120pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: km / s}
+#       value: !astropy.table.SerializedColumn {name: <vdisp_mol_obj_120pc>}
+#     <vdisp_mol_obj_150pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: km / s}
+#       value: !astropy.table.SerializedColumn {name: <vdisp_mol_obj_150pc>}
+#     <vdisp_mol_obj_60pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: km / s}
+#       value: !astropy.table.SerializedColumn {name: <vdisp_mol_obj_60pc>}
+#     <vdisp_mol_obj_90pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: km / s}
+#       value: !astropy.table.SerializedColumn {name: <vdisp_mol_obj_90pc>}
+#     <vdisp_mol_pix_120pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: km / s}
+#       value: !astropy.table.SerializedColumn {name: <vdisp_mol_pix_120pc>}
+#     <vdisp_mol_pix_150pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: km / s}
+#       value: !astropy.table.SerializedColumn {name: <vdisp_mol_pix_150pc>}
+#     <vdisp_mol_pix_60pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: km / s}
+#       value: !astropy.table.SerializedColumn {name: <vdisp_mol_pix_60pc>}
+#     <vdisp_mol_pix_90pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: km / s}
+#       value: !astropy.table.SerializedColumn {name: <vdisp_mol_pix_90pc>}
+#     ID:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id003
+#       value: !astropy.table.SerializedColumn {name: ID}
+#     MtoL_3p4um:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: solMass / solLum}
+#       value: !astropy.table.SerializedColumn {name: MtoL_3p4um}
+#     MtoL_3p4um_SFRW1:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: solMass / solLum}
+#       value: !astropy.table.SerializedColumn {name: MtoL_3p4um_SFRW1}
+#     MtoL_3p4um_W4W1:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: solMass / solLum}
+#       value: !astropy.table.SerializedColumn {name: MtoL_3p4um_W4W1}
+#     N_obj_120pc:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id003
+#       value: !astropy.table.SerializedColumn {name: N_obj_120pc}
+#     N_obj_150pc:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id003
+#       value: !astropy.table.SerializedColumn {name: N_obj_150pc}
+#     N_obj_60pc:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id003
+#       value: !astropy.table.SerializedColumn {name: N_obj_60pc}
+#     N_obj_90pc:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id003
+#       value: !astropy.table.SerializedColumn {name: N_obj_90pc}
+#     Sigma_SFR_FUVW4:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: solMass / (kpc2 yr)}
+#       value: !astropy.table.SerializedColumn {name: Sigma_SFR_FUVW4}
+#     Sigma_SFR_FUVW4recal:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: solMass / (kpc2 yr)}
+#       value: !astropy.table.SerializedColumn {name: Sigma_SFR_FUVW4recal}
+#     Sigma_SFR_HaW4:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: solMass / (kpc2 yr)}
+#       value: !astropy.table.SerializedColumn {name: Sigma_SFR_HaW4}
+#     Sigma_SFR_HaW4recal:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: solMass / (kpc2 yr)}
+#       value: !astropy.table.SerializedColumn {name: Sigma_SFR_HaW4recal}
+#     Sigma_SFR_Hacorr:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: solMass / (kpc2 yr)}
+#       value: !astropy.table.SerializedColumn {name: Sigma_SFR_Hacorr}
+#     Sigma_SFR_NUVW4:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: solMass / (kpc2 yr)}
+#       value: !astropy.table.SerializedColumn {name: Sigma_SFR_NUVW4}
+#     Sigma_SFR_W4ONLY:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: solMass / (kpc2 yr)}
+#       value: !astropy.table.SerializedColumn {name: Sigma_SFR_W4ONLY}
+#     Sigma_atom:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: solMass / pc2}
+#       value: !astropy.table.SerializedColumn {name: Sigma_atom}
+#     Sigma_mol:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: solMass / pc2}
+#       value: !astropy.table.SerializedColumn {name: Sigma_mol}
+#     Sigma_star:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: solMass / pc2}
+#       value: !astropy.table.SerializedColumn {name: Sigma_star}
+#     Sigma_star_3p4um:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: solMass / pc2}
+#       value: !astropy.table.SerializedColumn {name: Sigma_star_3p4um}
+#     Sigma_star_3p6um:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: solMass / pc2}
+#       value: !astropy.table.SerializedColumn {name: Sigma_star_3p6um}
+#     V_circ_CO21_URC:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: km / s}
+#       value: !astropy.table.SerializedColumn {name: V_circ_CO21_URC}
+#     Zprime:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id003
+#       value: !astropy.table.SerializedColumn {name: Zprime}
+#     alpha_CO21_B13:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: s solMass / (K km pc2)}
+#       value: !astropy.table.SerializedColumn {name: alpha_CO21_B13}
+#     alpha_CO21_Galactic:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: s solMass / (K km pc2)}
+#       value: !astropy.table.SerializedColumn {name: alpha_CO21_Galactic}
+#     alpha_CO21_N12:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: s solMass / (K km pc2)}
+#       value: !astropy.table.SerializedColumn {name: alpha_CO21_N12}
+#     alpha_CO21_S20:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: s solMass / (K km pc2)}
+#       value: !astropy.table.SerializedColumn {name: alpha_CO21_S20}
+#     beta_CO21_URC:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id003
+#       value: !astropy.table.SerializedColumn {name: beta_CO21_URC}
+#     c_CO21_pix_120pc:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id003
+#       value: !astropy.table.SerializedColumn {name: c_CO21_pix_120pc}
+#     c_CO21_pix_150pc:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id003
+#       value: !astropy.table.SerializedColumn {name: c_CO21_pix_150pc}
+#     c_CO21_pix_60pc:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id003
+#       value: !astropy.table.SerializedColumn {name: c_CO21_pix_60pc}
+#     c_CO21_pix_90pc:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id003
+#       value: !astropy.table.SerializedColumn {name: c_CO21_pix_90pc}
+#     corr_I_CO21_pix_120pc:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id003
+#       value: !astropy.table.SerializedColumn {name: corr_I_CO21_pix_120pc}
+#     corr_I_CO21_pix_150pc:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id003
+#       value: !astropy.table.SerializedColumn {name: corr_I_CO21_pix_150pc}
+#     corr_I_CO21_pix_60pc:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id003
+#       value: !astropy.table.SerializedColumn {name: corr_I_CO21_pix_60pc}
+#     corr_I_CO21_pix_90pc:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id003
+#       value: !astropy.table.SerializedColumn {name: corr_I_CO21_pix_90pc}
+#     corr_c_CO21_pix_120pc:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id003
+#       value: !astropy.table.SerializedColumn {name: corr_c_CO21_pix_120pc}
+#     corr_c_CO21_pix_150pc:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id003
+#       value: !astropy.table.SerializedColumn {name: corr_c_CO21_pix_150pc}
+#     corr_c_CO21_pix_60pc:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id003
+#       value: !astropy.table.SerializedColumn {name: corr_c_CO21_pix_60pc}
+#     corr_c_CO21_pix_90pc:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id003
+#       value: !astropy.table.SerializedColumn {name: corr_c_CO21_pix_90pc}
+#     corr_t_ff^-1_pix_120pc:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id003
+#       value: !astropy.table.SerializedColumn {name: corr_t_ff^-1_pix_120pc}
+#     corr_t_ff^-1_pix_150pc:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id003
+#       value: !astropy.table.SerializedColumn {name: corr_t_ff^-1_pix_150pc}
+#     corr_t_ff^-1_pix_60pc:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id003
+#       value: !astropy.table.SerializedColumn {name: corr_t_ff^-1_pix_60pc}
+#     corr_t_ff^-1_pix_90pc:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id003
+#       value: !astropy.table.SerializedColumn {name: corr_t_ff^-1_pix_90pc}
+#     e_<M_mol_obj_120pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id001
+#       value: !astropy.table.SerializedColumn {name: e_<M_mol_obj_120pc>}
+#     e_<M_mol_obj_150pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id001
+#       value: !astropy.table.SerializedColumn {name: e_<M_mol_obj_150pc>}
+#     e_<M_mol_obj_60pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id001
+#       value: !astropy.table.SerializedColumn {name: e_<M_mol_obj_60pc>}
+#     e_<M_mol_obj_90pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id001
+#       value: !astropy.table.SerializedColumn {name: e_<M_mol_obj_90pc>}
+#     e_<P_turb_obj_120pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: K / cm3}
+#       value: !astropy.table.SerializedColumn {name: e_<P_turb_obj_120pc>}
+#     e_<P_turb_obj_150pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: K / cm3}
+#       value: !astropy.table.SerializedColumn {name: e_<P_turb_obj_150pc>}
+#     e_<P_turb_obj_60pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: K / cm3}
+#       value: !astropy.table.SerializedColumn {name: e_<P_turb_obj_60pc>}
+#     e_<P_turb_obj_90pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: K / cm3}
+#       value: !astropy.table.SerializedColumn {name: e_<P_turb_obj_90pc>}
+#     e_<P_turb_pix_120pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: K / cm3}
+#       value: !astropy.table.SerializedColumn {name: e_<P_turb_pix_120pc>}
+#     e_<P_turb_pix_150pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: K / cm3}
+#       value: !astropy.table.SerializedColumn {name: e_<P_turb_pix_150pc>}
+#     e_<P_turb_pix_60pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: K / cm3}
+#       value: !astropy.table.SerializedColumn {name: e_<P_turb_pix_60pc>}
+#     e_<P_turb_pix_90pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: K / cm3}
+#       value: !astropy.table.SerializedColumn {name: e_<P_turb_pix_90pc>}
+#     e_<R_3d_obj_120pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id002
+#       value: !astropy.table.SerializedColumn {name: e_<R_3d_obj_120pc>}
+#     e_<R_3d_obj_150pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id002
+#       value: !astropy.table.SerializedColumn {name: e_<R_3d_obj_150pc>}
+#     e_<R_3d_obj_60pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id002
+#       value: !astropy.table.SerializedColumn {name: e_<R_3d_obj_60pc>}
+#     e_<R_3d_obj_90pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id002
+#       value: !astropy.table.SerializedColumn {name: e_<R_3d_obj_90pc>}
+#     e_<Sigma_mol_obj_120pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: solMass / pc2}
+#       value: !astropy.table.SerializedColumn {name: e_<Sigma_mol_obj_120pc>}
+#     e_<Sigma_mol_obj_150pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: solMass / pc2}
+#       value: !astropy.table.SerializedColumn {name: e_<Sigma_mol_obj_150pc>}
+#     e_<Sigma_mol_obj_60pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: solMass / pc2}
+#       value: !astropy.table.SerializedColumn {name: e_<Sigma_mol_obj_60pc>}
+#     e_<Sigma_mol_obj_90pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: solMass / pc2}
+#       value: !astropy.table.SerializedColumn {name: e_<Sigma_mol_obj_90pc>}
+#     e_<Sigma_mol_pix_120pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: solMass / pc2}
+#       value: !astropy.table.SerializedColumn {name: e_<Sigma_mol_pix_120pc>}
+#     e_<Sigma_mol_pix_150pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: solMass / pc2}
+#       value: !astropy.table.SerializedColumn {name: e_<Sigma_mol_pix_150pc>}
+#     e_<Sigma_mol_pix_60pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: solMass / pc2}
+#       value: !astropy.table.SerializedColumn {name: e_<Sigma_mol_pix_60pc>}
+#     e_<Sigma_mol_pix_90pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: solMass / pc2}
+#       value: !astropy.table.SerializedColumn {name: e_<Sigma_mol_pix_90pc>}
+#     e_<alpha_vir_obj_120pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id003
+#       value: !astropy.table.SerializedColumn {name: e_<alpha_vir_obj_120pc>}
+#     e_<alpha_vir_obj_150pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id003
+#       value: !astropy.table.SerializedColumn {name: e_<alpha_vir_obj_150pc>}
+#     e_<alpha_vir_obj_60pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id003
+#       value: !astropy.table.SerializedColumn {name: e_<alpha_vir_obj_60pc>}
+#     e_<alpha_vir_obj_90pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id003
+#       value: !astropy.table.SerializedColumn {name: e_<alpha_vir_obj_90pc>}
+#     e_<alpha_vir_pix_120pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id003
+#       value: !astropy.table.SerializedColumn {name: e_<alpha_vir_pix_120pc>}
+#     e_<alpha_vir_pix_150pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id003
+#       value: !astropy.table.SerializedColumn {name: e_<alpha_vir_pix_150pc>}
+#     e_<alpha_vir_pix_60pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id003
+#       value: !astropy.table.SerializedColumn {name: e_<alpha_vir_pix_60pc>}
+#     e_<alpha_vir_pix_90pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id003
+#       value: !astropy.table.SerializedColumn {name: e_<alpha_vir_pix_90pc>}
+#     e_<t_cross^-1_obj_120pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: 1 / Myr}
+#       value: !astropy.table.SerializedColumn {name: e_<t_cross^-1_obj_120pc>}
+#     e_<t_cross^-1_obj_150pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: 1 / Myr}
+#       value: !astropy.table.SerializedColumn {name: e_<t_cross^-1_obj_150pc>}
+#     e_<t_cross^-1_obj_60pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: 1 / Myr}
+#       value: !astropy.table.SerializedColumn {name: e_<t_cross^-1_obj_60pc>}
+#     e_<t_cross^-1_obj_90pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: 1 / Myr}
+#       value: !astropy.table.SerializedColumn {name: e_<t_cross^-1_obj_90pc>}
+#     e_<t_cross^-1_pix_120pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: 1 / Myr}
+#       value: !astropy.table.SerializedColumn {name: e_<t_cross^-1_pix_120pc>}
+#     e_<t_cross^-1_pix_150pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: 1 / Myr}
+#       value: !astropy.table.SerializedColumn {name: e_<t_cross^-1_pix_150pc>}
+#     e_<t_cross^-1_pix_60pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: 1 / Myr}
+#       value: !astropy.table.SerializedColumn {name: e_<t_cross^-1_pix_60pc>}
+#     e_<t_cross^-1_pix_90pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: 1 / Myr}
+#       value: !astropy.table.SerializedColumn {name: e_<t_cross^-1_pix_90pc>}
+#     e_<t_ff^-1_obj_120pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: 1 / Myr}
+#       value: !astropy.table.SerializedColumn {name: e_<t_ff^-1_obj_120pc>}
+#     e_<t_ff^-1_obj_150pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: 1 / Myr}
+#       value: !astropy.table.SerializedColumn {name: e_<t_ff^-1_obj_150pc>}
+#     e_<t_ff^-1_obj_60pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: 1 / Myr}
+#       value: !astropy.table.SerializedColumn {name: e_<t_ff^-1_obj_60pc>}
+#     e_<t_ff^-1_obj_90pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: 1 / Myr}
+#       value: !astropy.table.SerializedColumn {name: e_<t_ff^-1_obj_90pc>}
+#     e_<t_ff^-1_pix_120pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: 1 / Myr}
+#       value: !astropy.table.SerializedColumn {name: e_<t_ff^-1_pix_120pc>}
+#     e_<t_ff^-1_pix_150pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: 1 / Myr}
+#       value: !astropy.table.SerializedColumn {name: e_<t_ff^-1_pix_150pc>}
+#     e_<t_ff^-1_pix_60pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: 1 / Myr}
+#       value: !astropy.table.SerializedColumn {name: e_<t_ff^-1_pix_60pc>}
+#     e_<t_ff^-1_pix_90pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: 1 / Myr}
+#       value: !astropy.table.SerializedColumn {name: e_<t_ff^-1_pix_90pc>}
+#     e_<vdisp_mol_obj_120pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: km / s}
+#       value: !astropy.table.SerializedColumn {name: e_<vdisp_mol_obj_120pc>}
+#     e_<vdisp_mol_obj_150pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: km / s}
+#       value: !astropy.table.SerializedColumn {name: e_<vdisp_mol_obj_150pc>}
+#     e_<vdisp_mol_obj_60pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: km / s}
+#       value: !astropy.table.SerializedColumn {name: e_<vdisp_mol_obj_60pc>}
+#     e_<vdisp_mol_obj_90pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: km / s}
+#       value: !astropy.table.SerializedColumn {name: e_<vdisp_mol_obj_90pc>}
+#     e_<vdisp_mol_pix_120pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: km / s}
+#       value: !astropy.table.SerializedColumn {name: e_<vdisp_mol_pix_120pc>}
+#     e_<vdisp_mol_pix_150pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: km / s}
+#       value: !astropy.table.SerializedColumn {name: e_<vdisp_mol_pix_150pc>}
+#     e_<vdisp_mol_pix_60pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: km / s}
+#       value: !astropy.table.SerializedColumn {name: e_<vdisp_mol_pix_60pc>}
+#     e_<vdisp_mol_pix_90pc>:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: km / s}
+#       value: !astropy.table.SerializedColumn {name: e_<vdisp_mol_pix_90pc>}
+#     e_Sigma_SFR_FUVW4:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: solMass / (kpc2 yr)}
+#       value: !astropy.table.SerializedColumn {name: e_Sigma_SFR_FUVW4}
+#     e_Sigma_SFR_FUVW4recal:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: solMass / (kpc2 yr)}
+#       value: !astropy.table.SerializedColumn {name: e_Sigma_SFR_FUVW4recal}
+#     e_Sigma_SFR_HaW4:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: solMass / (kpc2 yr)}
+#       value: !astropy.table.SerializedColumn {name: e_Sigma_SFR_HaW4}
+#     e_Sigma_SFR_HaW4recal:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: solMass / (kpc2 yr)}
+#       value: !astropy.table.SerializedColumn {name: e_Sigma_SFR_HaW4recal}
+#     e_Sigma_SFR_Hacorr:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: solMass / (kpc2 yr)}
+#       value: !astropy.table.SerializedColumn {name: e_Sigma_SFR_Hacorr}
+#     e_Sigma_SFR_NUVW4:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: solMass / (kpc2 yr)}
+#       value: !astropy.table.SerializedColumn {name: e_Sigma_SFR_NUVW4}
+#     e_Sigma_SFR_W4ONLY:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: solMass / (kpc2 yr)}
+#       value: !astropy.table.SerializedColumn {name: e_Sigma_SFR_W4ONLY}
+#     e_Sigma_atom:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: solMass / pc2}
+#       value: !astropy.table.SerializedColumn {name: e_Sigma_atom}
+#     e_Sigma_mol:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: solMass / pc2}
+#       value: !astropy.table.SerializedColumn {name: e_Sigma_mol}
+#     e_Sigma_star:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: solMass / pc2}
+#       value: !astropy.table.SerializedColumn {name: e_Sigma_star}
+#     e_Sigma_star_3p4um:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: solMass / pc2}
+#       value: !astropy.table.SerializedColumn {name: e_Sigma_star_3p4um}
+#     e_Sigma_star_3p6um:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: solMass / pc2}
+#       value: !astropy.table.SerializedColumn {name: e_Sigma_star_3p6um}
+#     e_V_circ_CO21_URC:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: km / s}
+#       value: !astropy.table.SerializedColumn {name: e_V_circ_CO21_URC}
+#     e_beta_CO21_URC:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id003
+#       value: !astropy.table.SerializedColumn {name: e_beta_CO21_URC}
+#     e_c_CO21_pix_120pc:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id003
+#       value: !astropy.table.SerializedColumn {name: e_c_CO21_pix_120pc}
+#     e_c_CO21_pix_150pc:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id003
+#       value: !astropy.table.SerializedColumn {name: e_c_CO21_pix_150pc}
+#     e_c_CO21_pix_60pc:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id003
+#       value: !astropy.table.SerializedColumn {name: e_c_CO21_pix_60pc}
+#     e_c_CO21_pix_90pc:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id003
+#       value: !astropy.table.SerializedColumn {name: e_c_CO21_pix_90pc}
+#     e_rho_star_mp:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: solMass / pc3}
+#       value: !astropy.table.SerializedColumn {name: e_rho_star_mp}
+#     fracA_CO21_pix_120pc:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id003
+#       value: !astropy.table.SerializedColumn {name: fracA_CO21_pix_120pc}
+#     fracA_CO21_pix_150pc:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id003
+#       value: !astropy.table.SerializedColumn {name: fracA_CO21_pix_150pc}
+#     fracA_CO21_pix_60pc:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id003
+#       value: !astropy.table.SerializedColumn {name: fracA_CO21_pix_60pc}
+#     fracA_CO21_pix_90pc:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id003
+#       value: !astropy.table.SerializedColumn {name: fracA_CO21_pix_90pc}
+#     fracF_CO21_obj_120pc:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id003
+#       value: !astropy.table.SerializedColumn {name: fracF_CO21_obj_120pc}
+#     fracF_CO21_obj_150pc:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id003
+#       value: !astropy.table.SerializedColumn {name: fracF_CO21_obj_150pc}
+#     fracF_CO21_obj_60pc:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id003
+#       value: !astropy.table.SerializedColumn {name: fracF_CO21_obj_60pc}
+#     fracF_CO21_obj_90pc:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id003
+#       value: !astropy.table.SerializedColumn {name: fracF_CO21_obj_90pc}
+#     fracF_CO21_pix_120pc:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id003
+#       value: !astropy.table.SerializedColumn {name: fracF_CO21_pix_120pc}
+#     fracF_CO21_pix_150pc:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id003
+#       value: !astropy.table.SerializedColumn {name: fracF_CO21_pix_150pc}
+#     fracF_CO21_pix_60pc:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id003
+#       value: !astropy.table.SerializedColumn {name: fracF_CO21_pix_60pc}
+#     fracF_CO21_pix_90pc:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id003
+#       value: !astropy.table.SerializedColumn {name: fracF_CO21_pix_90pc}
+#     frac_CO21_bars:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id003
+#       value: !astropy.table.SerializedColumn {name: frac_CO21_bars}
+#     frac_CO21_center:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id003
+#       value: !astropy.table.SerializedColumn {name: frac_CO21_center}
+#     frac_CO21_sp_arms:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id003
+#       value: !astropy.table.SerializedColumn {name: frac_CO21_sp_arms}
+#     frac_Halpha_bars:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id003
+#       value: !astropy.table.SerializedColumn {name: frac_Halpha_bars}
+#     frac_Halpha_center:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id003
+#       value: !astropy.table.SerializedColumn {name: frac_Halpha_center}
+#     frac_Halpha_sp_arms:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id003
+#       value: !astropy.table.SerializedColumn {name: frac_Halpha_sp_arms}
+#     frac_area_bars:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id003
+#       value: !astropy.table.SerializedColumn {name: frac_area_bars}
+#     frac_area_center:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id003
+#       value: !astropy.table.SerializedColumn {name: frac_area_center}
+#     frac_area_sp_arms:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id003
+#       value: !astropy.table.SerializedColumn {name: frac_area_sp_arms}
+#     r_gal:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: kpc}
+#       value: !astropy.table.SerializedColumn {name: r_gal}
+#     rho_star_mp:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: !astropy.units.Unit {unit: solMass / pc3}
+#       value: !astropy.table.SerializedColumn {name: rho_star_mp}
+# schema: astropy-2.0
+ID,r_gal,frac_area_center,frac_area_bars,frac_area_sp_arms,frac_CO21_center,frac_CO21_bars,frac_CO21_sp_arms,frac_Halpha_center,frac_Halpha_bars,frac_Halpha_sp_arms,V_circ_CO21_URC,e_V_circ_CO21_URC,beta_CO21_URC,e_beta_CO21_URC,Zprime,alpha_CO21_S20,alpha_CO21_Galactic,alpha_CO21_N12,alpha_CO21_B13,<alpha_CO21_G20ICO_60pc>,<alpha_CO21_G20ICO_90pc>,<alpha_CO21_G20ICO_120pc>,<alpha_CO21_G20ICO_150pc>,Sigma_mol,e_Sigma_mol,Sigma_atom,e_Sigma_atom,MtoL_3p4um,MtoL_3p4um_SFRW1,MtoL_3p4um_W4W1,Sigma_star,e_Sigma_star,Sigma_star_3p6um,e_Sigma_star_3p6um,Sigma_star_3p4um,e_Sigma_star_3p4um,rho_star_mp,e_rho_star_mp,Sigma_SFR_HaW4recal,e_Sigma_SFR_HaW4recal,Sigma_SFR_FUVW4recal,e_Sigma_SFR_FUVW4recal,Sigma_SFR_Hacorr,e_Sigma_SFR_Hacorr,Sigma_SFR_HaW4,e_Sigma_SFR_HaW4,Sigma_SFR_FUVW4,e_Sigma_SFR_FUVW4,Sigma_SFR_NUVW4,e_Sigma_SFR_NUVW4,Sigma_SFR_W4ONLY,e_Sigma_SFR_W4ONLY,fracA_CO21_pix_60pc,fracF_CO21_pix_60pc,corr_I_CO21_pix_60pc,corr_c_CO21_pix_60pc,corr_t_ff^-1_pix_60pc,c_CO21_pix_60pc,e_c_CO21_pix_60pc,<Sigma_mol_pix_60pc>,e_<Sigma_mol_pix_60pc>,<vdisp_mol_pix_60pc>,e_<vdisp_mol_pix_60pc>,<P_turb_pix_60pc>,e_<P_turb_pix_60pc>,<alpha_vir_pix_60pc>,e_<alpha_vir_pix_60pc>,<t_cross^-1_pix_60pc>,e_<t_cross^-1_pix_60pc>,<t_ff^-1_pix_60pc>,e_<t_ff^-1_pix_60pc>,N_obj_60pc,fracF_CO21_obj_60pc,<M_mol_obj_60pc>,e_<M_mol_obj_60pc>,<Sigma_mol_obj_60pc>,e_<Sigma_mol_obj_60pc>,<vdisp_mol_obj_60pc>,e_<vdisp_mol_obj_60pc>,<R_3d_obj_60pc>,e_<R_3d_obj_60pc>,<P_turb_obj_60pc>,e_<P_turb_obj_60pc>,<alpha_vir_obj_60pc>,e_<alpha_vir_obj_60pc>,<t_cross^-1_obj_60pc>,e_<t_cross^-1_obj_60pc>,<t_ff^-1_obj_60pc>,e_<t_ff^-1_obj_60pc>,fracA_CO21_pix_90pc,fracF_CO21_pix_90pc,corr_I_CO21_pix_90pc,corr_c_CO21_pix_90pc,corr_t_ff^-1_pix_90pc,c_CO21_pix_90pc,e_c_CO21_pix_90pc,<Sigma_mol_pix_90pc>,e_<Sigma_mol_pix_90pc>,<vdisp_mol_pix_90pc>,e_<vdisp_mol_pix_90pc>,<P_turb_pix_90pc>,e_<P_turb_pix_90pc>,<alpha_vir_pix_90pc>,e_<alpha_vir_pix_90pc>,<t_cross^-1_pix_90pc>,e_<t_cross^-1_pix_90pc>,<t_ff^-1_pix_90pc>,e_<t_ff^-1_pix_90pc>,N_obj_90pc,fracF_CO21_obj_90pc,<M_mol_obj_90pc>,e_<M_mol_obj_90pc>,<Sigma_mol_obj_90pc>,e_<Sigma_mol_obj_90pc>,<vdisp_mol_obj_90pc>,e_<vdisp_mol_obj_90pc>,<R_3d_obj_90pc>,e_<R_3d_obj_90pc>,<P_turb_obj_90pc>,e_<P_turb_obj_90pc>,<alpha_vir_obj_90pc>,e_<alpha_vir_obj_90pc>,<t_cross^-1_obj_90pc>,e_<t_cross^-1_obj_90pc>,<t_ff^-1_obj_90pc>,e_<t_ff^-1_obj_90pc>,fracA_CO21_pix_120pc,fracF_CO21_pix_120pc,corr_I_CO21_pix_120pc,corr_c_CO21_pix_120pc,corr_t_ff^-1_pix_120pc,c_CO21_pix_120pc,e_c_CO21_pix_120pc,<Sigma_mol_pix_120pc>,e_<Sigma_mol_pix_120pc>,<vdisp_mol_pix_120pc>,e_<vdisp_mol_pix_120pc>,<P_turb_pix_120pc>,e_<P_turb_pix_120pc>,<alpha_vir_pix_120pc>,e_<alpha_vir_pix_120pc>,<t_cross^-1_pix_120pc>,e_<t_cross^-1_pix_120pc>,<t_ff^-1_pix_120pc>,e_<t_ff^-1_pix_120pc>,N_obj_120pc,fracF_CO21_obj_120pc,<M_mol_obj_120pc>,e_<M_mol_obj_120pc>,<Sigma_mol_obj_120pc>,e_<Sigma_mol_obj_120pc>,<vdisp_mol_obj_120pc>,e_<vdisp_mol_obj_120pc>,<R_3d_obj_120pc>,e_<R_3d_obj_120pc>,<P_turb_obj_120pc>,e_<P_turb_obj_120pc>,<alpha_vir_obj_120pc>,e_<alpha_vir_obj_120pc>,<t_cross^-1_obj_120pc>,e_<t_cross^-1_obj_120pc>,<t_ff^-1_obj_120pc>,e_<t_ff^-1_obj_120pc>,fracA_CO21_pix_150pc,fracF_CO21_pix_150pc,corr_I_CO21_pix_150pc,corr_c_CO21_pix_150pc,corr_t_ff^-1_pix_150pc,c_CO21_pix_150pc,e_c_CO21_pix_150pc,<Sigma_mol_pix_150pc>,e_<Sigma_mol_pix_150pc>,<vdisp_mol_pix_150pc>,e_<vdisp_mol_pix_150pc>,<P_turb_pix_150pc>,e_<P_turb_pix_150pc>,<alpha_vir_pix_150pc>,e_<alpha_vir_pix_150pc>,<t_cross^-1_pix_150pc>,e_<t_cross^-1_pix_150pc>,<t_ff^-1_pix_150pc>,e_<t_ff^-1_pix_150pc>,N_obj_150pc,fracF_CO21_obj_150pc,<M_mol_obj_150pc>,e_<M_mol_obj_150pc>,<Sigma_mol_obj_150pc>,e_<Sigma_mol_obj_150pc>,<vdisp_mol_obj_150pc>,e_<vdisp_mol_obj_150pc>,<R_3d_obj_150pc>,e_<R_3d_obj_150pc>,<P_turb_obj_150pc>,e_<P_turb_obj_150pc>,<alpha_vir_obj_150pc>,e_<alpha_vir_obj_150pc>,<t_cross^-1_obj_150pc>,e_<t_cross^-1_obj_150pc>,<t_ff^-1_obj_150pc>,e_<t_ff^-1_obj_150pc>
+0.0,0.24999999999999994,nan,1.0,nan,nan,1.0,nan,nan,nan,nan,19.817738123064245,1.266579889092979,0.6349360553309029,0.004025923238062001,1.2136174605891794,4.909587386708592,6.692307692307692,8.826188626148573,nan,nan,nan,nan,3.637877341720746,13.389747239318666,0.4233152531674875,nan,nan,0.3928347637289227,nan,0.3928347637289227,386.5879046002462,0.9187054470128154,386.5879046002462,0.9187054470128154,307.90905480103027,0.87015152611483,0.22934702301157936,0.000545030914805236,0.010534562706839522,0.0001780405630759647,nan,nan,nan,nan,0.013452242148216007,0.0003318581981184397,nan,nan,nan,nan,0.008460637608268505,0.0004598780599998859,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,0.6846473029045643,0.8058114742894537,0.9020384247012261,1.0616749818344833,0.9436401955385827,2.6480373196992053,0.9774843955870408,35.515266976996024,0.7642743172790182,5.562764550824915,0.0332636428264151,162103.01307774932,4361.299461125906,3.096092685535176,0.052519203817002,0.07991809155176337,0.0004778859136309095,0.09874071949308046,0.0010056388188276037,3.0,1.089659894064945,5931718.331550593,nan,36.60427453211381,nan,5.863667460470723,nan,106.81462219355583,nan,96138.91782237166,nan,1.4869870298451984,nan,0.056953750014955416,nan,0.09017475876541133,nan
+1.0,0.7499999999999999,nan,0.537712895377129,nan,nan,0.8872743359332098,nan,nan,nan,nan,40.290772391964154,2.3522770593095395,0.6443350849518054,0.008232788996295592,1.1868805159755536,5.087737542658389,6.692307692307692,8.6756620203652,nan,nan,nan,nan,3.549044162625022,10.18045242232001,0.2533856294305287,nan,nan,0.36115339687406267,nan,0.36115339687406267,183.8369334919609,0.4911844066255926,183.8369334919609,0.4911844066255926,180.09544614316695,0.42425106606689406,0.10906304339644901,0.0002913999120737545,0.007495602984589888,0.00017440060352379662,nan,nan,nan,nan,0.009652392342821297,0.0003273035724159723,nan,nan,nan,nan,0.006459590556992196,0.0004598780599998859,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,0.44872677219545765,0.778747836676722,0.8179902877145966,1.4195902862306637,0.8768863525626297,3.9933921917196082,1.0724257378014357,40.634256174071076,0.6070289800531589,6.9028651668425836,0.03444669885696231,340500.4770361668,7368.277464048369,3.3615282482479563,0.03804173477501702,0.09917079941131988,0.0004948824212228188,0.10314118691228548,0.0007493668177893408,4.0,0.6705250951920649,4967157.498798411,nan,65.09868154570479,nan,6.933290740292039,nan,90.29744701985193,nan,241965.7815984888,nan,2.156376711845571,nan,0.07996515314970379,nan,0.11109916889184412,nan
+2.0,1.2499999999999998,nan,0.23177842565597667,nan,nan,0.6274897447944391,nan,nan,nan,nan,55.85847892775681,3.0728755551313576,0.6281701794484293,0.012318652319590007,1.1607326072241217,5.272352086664679,6.692307692307692,11.876406149754958,nan,nan,nan,nan,4.268763108051855,4.246084456047022,0.19604216917175493,nan,nan,0.3559993790644759,nan,0.3559993790644759,114.49535405167849,0.3747666706539069,114.49535405167849,0.3747666706539069,113.43118315158351,0.33126105438029185,0.06792547901249704,0.00022233396134654915,0.003699623441407544,0.00012593894495762368,nan,nan,nan,nan,0.005337617443042163,0.00027402018722862495,nan,nan,nan,nan,0.0042516962457804265,0.000385401317310221,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,0.26220016542597185,0.6449091366650285,0.7039139740956999,1.731351132380104,0.796769178287561,3.3818347380917655,0.9119361640496779,14.35955607406947,0.35680257651135877,4.115718071290655,0.02572096960002765,44060.24134842259,1766.3810595128077,2.798154233004098,0.04738111820565526,0.059128933040203814,0.0003695232421582506,0.06039554478390991,0.0006375505766520525,6.0,0.5972956523214575,2473385.520454311,nan,16.90078578966894,nan,5.876968002294659,nan,101.52124974835714,nan,44976.29350983927,nan,2.755589771060544,nan,0.059336680346559326,nan,0.05902644741132045,nan
+3.0,1.7499999999999993,nan,0.10062240663900415,nan,nan,0.29230040972536375,nan,nan,nan,nan,68.71441783222807,3.545977950723014,0.5981754558075661,0.01705262935060925,1.1351607574127982,5.463665586655442,6.692307692307692,12.015029041779838,nan,nan,nan,nan,4.27743315235159,5.895295708108851,0.1611222615191751,nan,nan,0.3146944563636527,nan,0.3146944563636527,84.59468745018464,0.27946302357108993,84.59468745018464,0.27946302357108993,77.2128869270818,0.2447563059373031,0.050186618614871434,0.00016579414858858851,0.005539454182642077,0.00014106666098358356,nan,nan,nan,nan,0.006632902665463232,0.00022375210580646647,nan,nan,nan,nan,0.004152809534840937,0.000314678857868837,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,0.34387936132465996,0.6550815143665725,0.740255069868647,1.4101672467899617,0.8313025232207855,2.928907717682845,0.5795556810262692,17.266777351480393,0.28844273736496906,4.246803847886366,0.016553138737741918,48440.549263949404,1074.1806962389287,2.936845402923184,0.03635178735660983,0.06101219195528096,0.0002378125543087841,0.06650589562119914,0.000477545974864415,12.0,0.6399811217509759,2720768.0324420896,nan,31.20776465082077,nan,5.3550133276644765,nan,87.92253584119281,nan,68023.28700095078,nan,2.3420652957419055,nan,0.06363256000104865,nan,0.07865559823576493,nan
+4.0,2.2499999999999996,nan,0.0,nan,nan,0.0,nan,nan,nan,nan,79.46492011201703,3.8600799876203027,0.5614169019003469,0.021408077833350025,1.1101522755112827,5.661921122131867,6.692307692307692,12.22537815431639,nan,nan,nan,nan,4.709158605340242,4.564510697085779,0.13780334522956164,nan,nan,0.3039108790780347,nan,0.3039108790780347,64.32876863183753,0.23786696643567107,64.32876863183753,0.23786696643567107,60.293620189381194,0.20941654967328938,0.03816366576437169,0.00014111688435060698,0.003568980738378726,0.00010646819502727852,nan,nan,nan,nan,0.004715207218804427,0.00019372736461831762,nan,nan,nan,nan,0.0035729371114996073,0.0002725198849482856,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,0.32286172896124743,0.6102164028477632,0.7212858945192916,1.3632476211859186,0.8223379691821465,2.0761134805210517,0.2837721202812525,9.478221995918869,0.1731916378578274,3.7378258677217047,0.01749073852808446,19636.22400348476,573.4565398240901,3.144414289436337,0.04442169206544776,0.05369990195742314,0.00025128269279126866,0.051798804360838245,0.00043099892197712955,12.0,0.44474991879191184,1347363.4801647319,nan,34.465641007632755,nan,4.823639983898589,nan,73.02232000396025,nan,64228.76436688272,nan,2.3903364555661457,nan,0.07150432965196589,nan,0.08533769028922963,nan
+5.0,2.749999999999999,nan,0.0,nan,nan,0.0,nan,nan,nan,nan,88.61743465653596,4.025238201736947,0.5240938780181841,0.024767799168522953,1.0856947500826097,5.867370593021039,6.692307692307692,12.403690804725183,nan,nan,nan,nan,4.722642365900598,4.844197179399637,0.12350646849655267,nan,nan,0.3024370908821668,nan,0.3024370908821668,52.54511422530053,0.214240963834313,52.54511422530053,0.214240963834313,49.70517422396371,0.1890610465699246,0.03117289852572483,0.0001271005292142806,0.0027547108288778193,9.288743014372677e-05,nan,nan,nan,nan,0.003760045179266603,0.0001762262747413161,nan,nan,nan,nan,0.0029850477107270165,0.0002479161499387718,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,0.3174722587925522,0.5954677535225943,0.7165849421758816,1.3440646037813768,0.8205502015601241,2.2190457704506135,0.313125146141563,10.748887285122919,0.18465714473713238,3.7165416126435913,0.015773306760264928,21833.128033062676,566.747510226789,2.968107451085597,0.037802059446917925,0.05339411913294479,0.00022660901229008265,0.05444687304280018,0.00040983576051299486,18.0,0.5957525919343803,2073194.6361854535,nan,26.39280499599987,nan,5.286454668136762,nan,88.17529116454283,nan,62495.3623757787,nan,2.433602865877779,nan,0.06635276809045465,nan,0.07478361949896176,nan
+6.0,3.2499999999999996,nan,0.0,nan,nan,0.0,nan,nan,nan,nan,96.46529740257293,4.075728367973056,0.4889541381063647,0.026950466538769813,1.0617760431235232,6.080275039735189,6.692307692307692,12.5846042255064,nan,nan,nan,nan,4.888479337743492,3.171150029467157,0.10831774981735794,nan,nan,0.32301001374603,nan,0.32301001374603,50.75955705410041,0.2108000230231382,50.75955705410041,0.2108000230231382,47.76485775003913,0.19046726832594937,0.03011359941998798,0.00012505915771245354,0.002234925034421177,8.561779961613172e-05,nan,nan,nan,nan,0.0030665294876248018,0.00016774103741794288,nan,nan,nan,nan,0.0023858598225961303,0.0002360091434016278,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,0.18870326173428797,0.5200643484204722,0.621140111646041,1.711856088083302,0.7457644587350872,2.532673555713977,0.3552298958308425,8.031178875466713,0.15392437222771344,3.3279466997077183,0.014131657149230582,11675.778676688047,305.0213024044375,2.604869138366718,0.04101519087288611,0.04781132594667087,0.00020302406464271016,0.04676636725455081,0.0004147130324834795,12.0,0.5143253870753792,1492134.5885115513,nan,23.247085254953625,nan,4.085417481405621,nan,83.98171573474859,nan,30970.23803607385,nan,1.5087333735454758,nan,0.053277294782206705,nan,0.06673446205059957,nan
+7.0,3.7499999999999996,nan,0.0,nan,nan,0.0,nan,nan,nan,nan,103.24842384579564,4.089936764497892,0.4578754460959289,0.028120395273177473,1.0383842840404827,6.300904974845249,6.692307692307692,12.768156350068162,nan,nan,nan,nan,5.23730419630084,2.760642684034756,0.09640553307648243,nan,nan,0.32413454723296864,nan,0.32413454723296864,47.18046708277303,0.19700462164164784,47.18046708277303,0.19700462164164784,43.87785145633359,0.1724524029336829,0.027990269589316368,0.00011687490207370994,0.002070312614239625,7.818188584199163e-05,nan,nan,nan,nan,0.002820350887532408,0.00015194650585154124,nan,nan,nan,nan,0.0021700069224993906,0.00021378218633744136,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,0.18574782488606545,0.4880770849977513,0.6117560715311477,1.607470344838465,0.7438401808074314,2.168038179073145,0.26305338316222876,5.984797134697826,0.12718528019091718,2.9572676439633723,0.01544393401480843,7253.748574247138,246.74010665663414,2.55648327634567,0.043746261533736536,0.04248592297021147,0.0002218770395389071,0.040924435060300995,0.0003993854131547031,14.0,0.3957759654264961,1075671.8326768477,nan,23.64332162474368,nan,4.035958886487304,nan,71.14967728767473,nan,31422.768750271996,nan,1.8041005313911418,nan,0.0599775020962532,nan,0.07087820817629442,nan
+8.0,4.249999999999998,nan,0.0,nan,nan,0.0,nan,nan,nan,nan,109.22508293071228,4.057049388085801,0.4308238481397294,0.028530726494853414,1.0155078637584511,6.529540726788972,6.692307692307692,12.954385665094321,nan,nan,nan,nan,5.292596431468961,2.4892190075382072,0.08795976819605657,nan,nan,0.33226392362966695,nan,0.33226392362966695,42.82850682261247,0.18926522391467274,42.82850682261247,0.18926522391467274,39.30592699248765,0.16884622740796595,0.025408426965542026,0.00011228342932595342,0.002531936892698427,9.017584143425772e-05,nan,nan,nan,nan,0.0030172848925048234,0.00014470457754949318,nan,nan,nan,nan,0.0018096413054072072,0.00020359616347492403,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,0.14687271842297395,0.4454908489737962,0.5703587604984885,1.729998676148755,0.7124664945215324,2.370506380249227,0.3438119336656928,5.90116496495211,0.14982206556834815,3.056283813919318,0.02030338111706798,8921.91332802137,493.37433054252017,2.5620747190196655,0.04772968402836474,0.04390845007525997,0.00029169083885889776,0.04010413736290363,0.0004459878916690763,14.0,0.3785051430804844,904039.3576610056,nan,27.71614770273351,nan,4.836035996506743,nan,70.74646409906329,nan,52385.90916687446,nan,2.8844826634007075,nan,0.07475292403732471,nan,0.07457428754853214,nan
+9.0,4.75,nan,0.0,nan,nan,0.0,nan,nan,nan,nan,114.3112467801185,4.078398719951224,0.4072207553466693,0.02826599960429918,0.9931354289594042,6.766472796051532,6.692307692307692,13.143331218614485,nan,nan,nan,nan,5.037692056133235,2.2340375375544457,0.07963508151157937,nan,nan,0.33157226564368614,nan,0.33157226564368614,36.36946156328336,0.1791560525599136,36.36946156328336,0.1791560525599136,33.6215159676332,0.15619167635178324,0.021576535734345856,0.00010628606539464932,0.002400107267280223,8.728697392130916e-05,nan,nan,nan,nan,0.002780400556844489,0.0001328756104883718,nan,nan,nan,nan,0.0015573487775845554,0.0001869470987673211,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,0.11168066310393718,0.47578661195513927,0.550998363366734,2.3473861742305777,0.6819612020016345,3.9183481399132387,0.6937793778190877,8.753596565796759,0.19934921004727846,3.323137119061479,0.017981646096061683,13779.46733830518,415.439603273236,2.2460686368323497,0.03958419035060495,0.04774222859296073,0.00025833537093540696,0.04658562170188254,0.00047621055053164785,9.0,0.3921635951692085,1432179.8676766618,nan,27.722385662389968,nan,4.502489257493634,nan,79.82432621330778,nan,43340.39267804582,nan,1.6092340476110543,nan,0.06099192150243162,nan,0.07067490191861672,nan
+10.0,5.249999999999998,nan,0.0,nan,nan,0.0,nan,nan,nan,nan,118.96681446701862,4.045485574974769,0.3860773838477721,0.02758412471903432,0.9712558764478358,7.012002224269894,6.692307692307692,13.335032628191241,nan,nan,nan,nan,5.688333177495853,1.2319420234271863,0.07436147886167871,nan,nan,0.32176537445481557,nan,0.32176537445481557,28.946111489667345,0.16491639087970816,28.946111489667345,0.16491639087970816,27.42978643344383,0.1471988127374909,0.017172561321548006,9.783824802585652e-05,0.0015390793803568984,7.396171009246422e-05,nan,nan,nan,nan,0.001970727375578899,0.0001315724045921432,nan,nan,nan,nan,0.0013853105398392335,0.0001851408042448028,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,0.03522235340417158,0.1888327862544581,0.3646838996358956,1.9551299165101028,0.5591973228055971,2.5397159684542423,0.598462915456977,3.1282260090981566,0.15930503127589127,2.5957839617930447,0.030279802204740764,3028.057981022143,242.97486036675886,2.200071918284072,0.08899136948215429,0.03729262645735565,0.0004350182332937687,0.0288293930759403,0.0006614710883141701,2.0,0.0922593098297667,517867.3337741275,nan,12.277266402972778,nan,3.7861198302959345,nan,83.77677134725974,nan,42251.15892810225,nan,2.0148121068904823,nan,0.07389376603052056,nan,0.0512746702165535,nan
+11.0,5.749999999999998,nan,0.0,nan,nan,0.0,nan,nan,nan,nan,nan,nan,nan,nan,0.94985834764033,7.26644097673127,6.692307692307692,13.529530089227322,nan,nan,nan,nan,5.347009488963145,1.1725722377551266,0.08769049012049336,nan,nan,0.30229487790833176,nan,0.30229487790833176,23.71183796359508,0.14799191064522568,23.71183796359508,0.14799191064522568,22.198006138124693,0.12939827734331028,0.014067277797288898,8.779763601599385e-05,0.0013062077847234073,6.616410048018136e-05,nan,nan,nan,nan,0.0017387788308968388,0.00012148115476685313,nan,nan,nan,nan,0.0013348222570952024,0.0001709381109657769,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,0.013394462423588637,0.10032598764021522,0.2747772292106331,2.058111481432096,0.48158910742887046,3.2371878336952027,1.3984615478483053,3.7954735843312926,0.24241189822154907,3.412655287099312,0.06183237945880817,6977.14368650009,647.2097006112915,2.4852161439323917,0.12489045357784141,0.04902830145988011,0.0008883219338941632,0.030935916436931124,0.0008999956171043548,1.0,0.0953775825815801,750132.8766623746,nan,13.544617445271246,nan,5.33857844847106,nan,76.10044521734982,nan,28384.43488882805,nan,1.8472254628802423,nan,0.07174503523216395,nan,0.05117863263555589,nan
+12.0,6.249999999999998,nan,0.0,nan,nan,0.0,nan,nan,nan,nan,nan,nan,nan,nan,0.9289322231765961,7.5301123387502535,6.692307692307692,13.726864383393382,nan,nan,nan,nan,5.2353354848845575,1.8985333208051878,0.10974103839330365,nan,nan,0.2854395849729666,nan,0.2854395849729666,20.754541906019046,0.13453893222979005,20.754541906019046,0.13453893222979005,19.074004111428636,0.1197246477427302,0.012312833235268031,7.981652612221776e-05,0.001808740009231728,7.927270122708678e-05,nan,nan,nan,nan,0.0021195412727577517,0.00011768210899316766,nan,nan,nan,nan,0.001338462364386728,0.00016559496948014425,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,0.034624464457462624,0.20470176988404656,0.36148665882860626,2.137129339360442,0.5516519795995969,2.8437887891731806,0.6190561366995206,5.397522352659228,0.2358379239206552,3.4214549501689637,0.04042645670168499,9120.250615057956,622.3564944663384,2.232980086552138,0.07487079917296638,0.04915472295232188,0.0005807913043297452,0.037607883011390626,0.0007549181039225966,2.0,0.0446598975158782,492437.90446560737,nan,32.3032430379068,nan,6.56435031378274,nan,47.0315032281938,nan,118500.89154316766,nan,3.617849636556496,nan,0.14276400245981147,nan,0.0843671179208635,nan
+13.0,6.749999999999998,nan,0.0,nan,nan,0.0,nan,nan,nan,nan,nan,nan,nan,nan,0.9084671176491658,7.803351326429716,6.692307692307692,13.927076887179268,nan,nan,nan,nan,5.605105712550514,1.3633818869715457,0.13050199621268713,nan,nan,0.28619433818280227,nan,0.28619433818280227,18.907407384851684,0.13054208480066296,18.907407384851684,0.13054208480066296,17.409323944595936,0.11385842281466167,0.01121700276956912,7.744535762885874e-05,0.0015325757109339447,7.568593905048645e-05,nan,nan,nan,nan,0.0018362490094569989,0.00011677894698266095,nan,nan,nan,nan,0.0012131443473660625,0.00016433567386987008,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,0.01986967204358509,0.1316937496448542,0.3073924733833254,2.0373596173936677,0.5103660540253129,2.6622675480518128,0.8156097241221955,3.6311361236986635,0.22442588190732882,3.186857417071463,0.04796305057170781,5036.628476655116,446.0424836356393,2.370646349342864,0.11784180661041736,0.04578435059794713,0.0006890666295415377,0.030984765084199346,0.000885772100511338,2.0,0.09661711966880808,582116.639679478,nan,5.4178771286823135,nan,4.64618924296289,nan,93.85481427234978,nan,8811.900067021912,nan,2.550263593275631,nan,0.05030287189372764,nan,0.032431438307089326,nan
+14.0,7.249999999999998,nan,0.0,nan,nan,0.0,nan,nan,nan,nan,nan,nan,nan,nan,0.8884528744492581,8.086505112325865,6.692307692307692,14.130209580569426,nan,nan,nan,nan,5.530264275717387,1.2658519970571624,0.15874531971916742,nan,nan,0.2908196612533107,nan,0.2908196612533107,16.06577660817413,0.12761712903017833,16.06577660817413,0.12761712903017833,14.751631761663331,0.12271683653455073,0.009531177757006987,7.571009925574728e-05,0.0015982202833489177,8.338674304592482e-05,nan,nan,nan,nan,0.0017835990995115104,0.00011339079417382548,nan,nan,nan,nan,0.0009850189850885136,0.00015957130536057467,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,0.01674196120116928,0.14392714649723995,0.28772772705604294,2.4735352224099474,0.48352982747602274,2.9972387474598765,1.1067481574435882,3.7950689685527332,0.4085030693417505,2.5447632176125117,0.05136586636154861,3098.2235732469103,452.90081088123026,1.3977828429670882,0.11074576946979123,0.03655963118505855,0.0007379535944461891,0.03120706963539195,0.0015017639101674737,2.0,0.11081848266850869,302294.97734454274,nan,26.04939274155445,nan,4.2548604160607555,nan,51.97927718473939,nan,41177.665191225205,nan,2.9857985536631855,nan,0.09123528848789407,nan,0.07518723929032738,nan
+15.0,7.749999999999998,nan,0.0,nan,nan,0.0,nan,nan,nan,nan,nan,nan,nan,nan,0.868879560726136,8.379933466559873,6.692307692307692,14.33630505584546,nan,nan,nan,nan,5.223335386744772,0.9319167824425758,0.21539389518503824,nan,nan,0.31926661726344835,nan,0.31926661726344835,14.654528846912031,0.1372278846987126,14.654528846912031,0.1372278846987126,13.53319784859381,0.13499300393028987,0.008693941338263088,8.141177324823616e-05,0.00070107346508548,5.560807612974347e-05,nan,nan,nan,nan,0.0009327952598388541,0.00010413716554612833,nan,nan,nan,nan,0.0006988079431048041,0.0001465428965781398,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,0.002594706798131811,0.043728953456998836,0.16397638319231317,2.763516723286978,0.3589574003427864,3.2322152540565496,2.9713565620270064,3.012155691665091,0.8766935975816689,2.599311393838014,0.22521145241928794,3079.458615907183,1471.8320683753745,0.941534342505815,0.22091376257976506,0.037343303340965084,0.003235525949619344,0.027430538575034656,0.003672263575196816,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+16.0,8.249999999999998,nan,0.0,nan,nan,0.0,nan,nan,nan,nan,nan,nan,nan,nan,0.8497374624575694,8.684009213934932,6.692307692307692,nan,nan,nan,nan,nan,nan,0.0,0.30003103494343086,nan,nan,0.3265025166468871,nan,0.3265025166468871,11.695209426777803,0.1389934479723364,11.695209426777803,0.1389934479723364,10.854396898368995,0.13353367366670013,0.006938296396784734,8.245921078036204e-05,0.0004740655216139325,5.133751126524474e-05,nan,nan,nan,nan,0.0006626056986614253,0.00010351099587601568,nan,nan,nan,nan,0.000525702846755523,0.00014566800579421968,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,0.0,0.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+17.0,8.749999999999998,nan,0.0,nan,nan,0.0,nan,nan,nan,nan,nan,nan,nan,nan,0.8310170796288439,8.999118707641172,6.692307692307692,nan,nan,nan,nan,nan,nan,0.0,0.4815163291339531,nan,nan,0.3045110229140924,nan,0.3045110229140924,9.057728858509176,0.12373972275558233,9.057728858509176,0.12373972275558233,8.251703442322642,0.11741701107365131,0.00537358547493425,7.340979038549288e-05,0.0005433803318213896,5.902348304432614e-05,nan,nan,nan,nan,0.0006874095429024398,0.00010112663883494551,nan,nan,nan,nan,0.00048634056138732436,0.00014231886831934208,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,0.0,0.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+18.0,9.249999999999998,nan,0.0,nan,nan,0.0,nan,nan,nan,nan,nan,nan,nan,nan,0.8127091215180344,9.325662320148657,6.692307692307692,nan,nan,nan,nan,nan,nan,0.0,0.8946399538565787,nan,nan,0.28767622031026363,nan,0.28767622031026363,7.41992736706572,0.11215170961990363,7.41992736706572,0.11215170961990363,6.628240068420534,0.1038270087880633,0.004401943858948104,6.653508922784756e-05,0.0009300647964136863,7.890532140585904e-05,nan,nan,nan,nan,0.0009914278284142764,9.733812372265877e-05,nan,nan,nan,nan,0.0004555973304372166,0.00013697522267735118,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,0.0,0.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+19.0,9.749999999999998,nan,0.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,0.7948045020850978,9.664054951913876,6.692307692307692,nan,nan,nan,nan,nan,nan,0.0,nan,nan,nan,0.35,nan,0.35,6.755806779456948,0.13387739434372437,6.755806779456948,0.13387739434372437,6.984891101355521,0.11500391308751652,0.0040079478806045125,7.942406235660815e-05,0.0,4.00086628595334e-05,nan,nan,nan,nan,0.0,9.348001812043101e-05,nan,nan,nan,nan,0.0,0.00013154828950607904,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,0.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+20.0,10.249999999999998,nan,0.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,0.7772943354625799,10.014726558544632,6.692307692307692,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,0.35,nan,0.35,5.678198238898199,0.1306485642552426,5.678198238898199,0.1306485642552426,5.7773761281681395,0.1133530535607963,0.00336864616472552,7.750852759778208e-05,0.0,3.419437801286916e-05,nan,nan,nan,nan,0.0,9.214745542519797e-05,nan,nan,nan,nan,0.0,0.0001296733961387785,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+21.0,10.749999999999998,nan,0.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,0.7601699315456661,10.37812269709374,6.692307692307692,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,0.35,nan,0.35,4.561269038501174,0.12845420325866372,4.561269038501174,0.12845420325866372,5.223394071711127,0.11100486465981751,0.002706017086118806,7.62067016586118e-05,0.0,2.950730386969162e-05,nan,nan,nan,nan,0.0,9.258625152831829e-05,nan,nan,nan,nan,0.0,0.00013028942524108335,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+22.0,11.249999999999996,nan,0.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,0.7434227916793553,10.754705092176277,6.692307692307692,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,0.35,nan,0.35,3.4160007134222026,0.12659495087187528,3.4160007134222026,0.12659495087187528,4.292264910583932,0.11000704787677194,0.0020265755469999628,7.510368215163047e-05,0.0,nan,nan,nan,nan,nan,0.0,8.848667662528948e-05,nan,nan,nan,nan,0.0,0.0001244958565615196,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+23.0,11.749999999999998,nan,0.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,0.7270446044406942,11.144952222628056,6.692307692307692,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,0.35,nan,0.35,2.4710185788864325,0.12316661493541792,2.4710185788864325,0.12316661493541792,3.175829885527854,0.10832378064968756,0.0014659557325259,7.306978861395456e-05,0.0,nan,nan,nan,nan,nan,0.0,8.699841903679669e-05,nan,nan,nan,nan,0.0,0.00012238560443623354,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+24.0,12.249999999999998,nan,0.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,0.7110272415138845,11.549359929452823,6.692307692307692,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,0.35,nan,0.35,1.741298706350725,0.12105536592985554,1.741298706350725,0.12105536592985554,2.6000991291542648,0.10785686562865339,0.0010330423423061197,7.181726966936268e-05,0.0,nan,nan,nan,nan,nan,0.0,8.325533175702862e-05,nan,nan,nan,nan,0.0,0.00011709332584978938,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+25.0,12.749999999999998,nan,0.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,0.6953627536563131,11.968442045828336,6.692307692307692,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,0.35,nan,0.35,1.3477787293942394,0.11795027785329612,1.3477787293942394,0.11795027785329612,1.9166191903439145,0.10615822615328137,0.0007995828001513241,6.997514605899249e-05,0.0,nan,nan,nan,nan,nan,0.0,8.20337453250827e-05,nan,nan,nan,nan,0.0,0.00011533242364953772,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
+26.0,13.249999999999996,nan,0.0,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,0.6800433667534048,12.402731049974212,6.692307692307692,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,0.35,nan,0.35,0.9622710144790053,0.1151216075755066,0.9622710144790053,0.1151216075755066,1.6080821547562425,0.10390953679589043,0.0005708766101445991,6.82970099880691e-05,0.0,nan,nan,nan,nan,nan,0.0,8.301468960044497e-05,nan,nan,nan,nan,0.0,0.00011664554858494507,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan
