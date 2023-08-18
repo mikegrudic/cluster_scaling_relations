@@ -1,4 +1,4 @@
-# Star cluster properties compilation from Grudic & Fall 2023 paper
+# %%
 
 from astropy.table import Table
 from os import system
@@ -130,7 +130,7 @@ sigma_SFR = np.repeat(np.nan, len(M))
 Ncl = len(M)
 galaxy_name.append(np.repeat("M82",Ncl))
 ids.append(id)
-references.append(np.repeat("Mayya2008;Cuevas2021;Greco2012",Ncl)) # bibcodes for references the data came from
+references.append(np.repeat("2008ApJ...679..404M;2020MNRAS.492..993C;2021MNRAS.500.4422C;2012ApJ...757...24G",Ncl)) # bibcodes for references the data came from
 masses.append(M)     # best mass estimate
 reffs.append(Rh)    # projected effective (half light) radius
 reff_error.append(Rh_error)
@@ -143,7 +143,7 @@ rho_tidals.append(np.interp(RGC,Rgc2,rho_tidal))
 sigma_gass.append(sigma_gas)
 sigma_SFRs.append(sigma_SFR)
 sigma_stars.append(sigma_star)
-ages.append(np.array([(1.00001e7 if r < 0.4 else 1e8) for r in RGC])) #  VERY approximate age, do not use for analysis
+ages.append(np.array([(1.00001e7 if r < 0.4 else 1e8) for r in RGC])) #  VERY approximate age, do not use for analysis - just saying stuff in the central region is young (~10Myr), while stuff in the disk is ~100Myr old
 DGCs.append(np.repeat(3630, Ncl)) # Freedman 1994, as assumed in Cuevas-Otahola 2020;21
 sigma_1Ds.append(np.repeat(np.nan,Ncl)) # gas velocity dispersion profile not available; inclination too high
 
@@ -213,7 +213,7 @@ rho_tidal = 3 * (4*omega**2 - kappa**2) / (4*np.pi) * 2.325e-4 #3 * Menc / (4*np
 
 galaxy_name.append(np.repeat("M31",len(mass[cut])))
 ids.append(id2[cut])
-references.append(np.repeat("2012A&A...546A...4T,2015ApJ...802..127J,2016ApJ...827...33J",len(mass[cut]))) # bibcodes for references the data came from
+references.append(np.repeat("2012A&A...546A...4T;2015ApJ...802..127J;2016ApJ...827...33J",len(mass[cut]))) # bibcodes for references the data came from
 masses.append(mass[cut])     # best mass estimate
 reffs.append(reff[cut])    # projected effective (half light) radius
 Rgcs.append(Rgc[cut]) # galactocentric radius
@@ -277,7 +277,7 @@ rho_tidal = 3 * (4*omega**2 - kappa**2) / (4*np.pi) * 2.325e-4 #3 * Menc / (4*np
 
 galaxy_name.append(np.repeat("M33",len(mass[cut])))
 ids.append(id2[cut])
-references.append(np.repeat("",len(mass[cut]))) # bibcodes for references the data came from
+references.append(np.repeat("2012ApJ...761..124G;2022ApJ...928...15W;2022ApJ...938...81J",len(mass[cut]))) # bibcodes for references the data came from
 masses.append(mass[cut])     # best mass estimate
 reffs.append(reff[cut])    # projected effective (half light) radius
 Rgcs.append(Rgc[cut]) # galactocentric radius
@@ -367,7 +367,7 @@ for g in np.unique(galaxies):
 
     Ncl = len(mass)
     galaxy_name.append(np.repeat(g,Ncl))
-    references.append(np.repeat("2005ApJS..161..304M",Ncl)) # bibcodes for references the data came from
+    references.append(np.repeat("2003MNRAS.338...85M;2005ApJS..161..304M;2009ApJ...696..370W;2009MNRAS.395..342B;2019MNRAS.483..392D",Ncl)) # bibcodes for references the data came from
     regions.append(np.repeat("",Ncl)) # galactic subregion designation (if any)
     Vcs.append(np.interp(Rgc,Rgc2,Vrot)) # circular velocity at Rgc
     omegas.append(np.interp(Rgc,Rgc2,omega)) # orbital angular frequency = Vc/Rgc
@@ -422,7 +422,7 @@ sigma_1D = np.interp(Rgc, Rgc3, sigma_1D)
 
 
 galaxy_name.append(np.repeat("M83",len(mass)))
-references.append(np.repeat("2015MNRAS.452..525R",len(mass))) # bibcodes for references the data came from
+references.append(np.repeat("2004A&A...422..865L;2014ApJ...789..126B;2015MNRAS.452..525R",len(mass))) # bibcodes for references the data came from
 masses.append(mass)     # best mass estimate
 reffs.append(reff)    # projected effective (half light) radius
 reff_error.append(e_Reff)
@@ -622,7 +622,7 @@ for g in np.unique(catalog["galaxy"]):
     reff = rcl
     age = subset["age_yr"]
     galaxy_name.append(np.repeat(name,len(mass)))
-    references.append(np.repeat("2021MNRAS.508.5935B",len(mass))) # bibcodes for references the data came from
+    references.append(np.repeat("2008AJ....136.2782L;2023ApJ...945L..19S;2021MNRAS.508.5935B",len(mass))) # bibcodes for references the data came from
     masses.append(mass)     # best mass estimate
     reffs.append(reff)    # projected effective (half light) radius
     reff_error.append(e_logr)
