@@ -16,7 +16,7 @@ The data compilation procedure can be reproduced in Cluster_Compilation.py
 
 # Data fields
 
-`Reference`: ADS bibcodes of the papers that the cluster and galactic data came from - PLEASE LOOK AT THESE AND CITE WITH APPROPRIATE CREDIT
+`Reference`: ADS bibcodes of the papers that the cluster and galactic data came from - **PLEASE DON'T JUST CITE US; CITE THE NICE FOLKS WHO WORKED HARD GETTING THE DATA**
 
 `Mass`: Cluster mass in solar
 
