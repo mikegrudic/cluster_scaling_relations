@@ -10,8 +10,8 @@ The data compilation procedure can be reproduced in Cluster_Compilation.py
 ```
     from astropy.table import Table
     data = Table.read("Cluster_Compilation.dat",format='ascii.basic')
-    M = data["Mass"]
-    Reff = data["Reff"]
+    M_solar = data["Mass"]
+    Reff_pc = data["Reff"]
 ```
 
 # Data fields
