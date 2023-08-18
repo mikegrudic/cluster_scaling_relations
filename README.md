@@ -27,3 +27,15 @@ The compilation includes star cluster masses, ages, radii, and - where possible 
 `Vcirc`: Circular velocity at cluster galactocentric radius in km/s
 
 `Omega`: Circular orbital frequency Vcirc/Rgc in km/s/kpc
+
+`Kappa`: Epicyclic frequency in km/s/kpc
+
+`Age`: Cluster age in yr
+
+`SigmaGas`: Gas surface density in msun pc^-2
+
+`SigmaStar`: Stellar surface density in msun pc^-2
+
+`GalaxyDistance`: Distance to galaxy in kpc
+
+`SigmaGas1D`: Plane-vertical gas velocity dispersion in km/s
