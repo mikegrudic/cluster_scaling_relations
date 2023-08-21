@@ -40,6 +40,8 @@ The data compilation procedure can be reproduced in Cluster_Compilation.py
 
 `SigmaStar`: Stellar surface density in msun pc^-2
 
+`SigmaSFR`: SFR surface density in msun yr^-1 kpc^-2
+
 `GalaxyDistance`: Distance to galaxy in kpc
 
 `SigmaGas1D`: Plane-vertical gas velocity dispersion in km/s
