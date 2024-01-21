@@ -224,7 +224,7 @@ Ns = np.array(Ns)[order]
 corrs = np.ma.array(corrs, mask=np.isnan(corrs))
 # corrs[ps > 0.05] = np.nan
 cmap = plt.cm.RdBu
-cmap.set_bad("#555555", 1.0)
+cmap.set_bad("#DDDDDD", 1.0)
 # corrs[ps>0.05] = 1.
 plot = ax.matshow(corrs, vmin=-1, vmax=1, cmap=cmap)
 for i in range(corrs.shape[0]):
