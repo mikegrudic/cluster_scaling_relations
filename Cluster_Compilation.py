@@ -1,72 +1,16 @@
-# %%
-
 from astropy.table import Table
 from os import system
 from os.path import exists
-from astropy.coordinates import ICRS, Distance, Angle
+from astropy.coordinates import ICRS, Distance, Angle, SkyCoord
 from astropy.table import Table
 from astropy import units as u
 import numpy as np
+from density_models import model_r50
+from scipy.integrate import trapz, quad
+from correct_rgc import correct_rgc
 
 include_galaxies_without_env_data = True
-
-
-def correct_rgc(
-    coord,
-    glx_ctr=ICRS("00h42m44.33s", "+41d16m07.5s"),
-    glx_PA=Angle("37d42m54s"),
-    glx_incl=Angle("77.5d"),
-    glx_dist=Distance(783, unit=u.kpc),
-):
-    """Computes deprojected galactocentric distance.
-    Inspired by: http://idl-moustakas.googlecode.com/svn-history/
-        r560/trunk/impro/hiiregions/im_hiiregion_deproject.pro
-    Parameters
-    ----------
-    coord : :class:`astropy.coordinates.ICRS`
-        Coordinate of points to compute galactocentric distance for.
-        Can be either a single coordinate, or array of coordinates.
-    glx_ctr : :class:`astropy.coordinates.ICRS`
-        Galaxy center
-    glx_PA : :class:`astropy.coordinates.Angle`
-        Position angle of galaxy disk.
-    glx_incl : :class:`astropy.coordinates.Angle`
-        Inclination angle of the galaxy disk.
-    glx_dist : :class:`astropy.coordinates.Distance`
-        Distance to galaxy.
-    Returns
-    -------
-    obj_dist : class:`astropy.coordinates.Distance`
-        Galactocentric distance(s) for coordinate point(s).
-    """
-    # distance from coord to glx centre
-    sky_radius = glx_ctr.separation(coord)
-    avg_dec = 0.5 * (glx_ctr.dec + coord.dec).radian
-    x = (glx_ctr.ra - coord.ra) * np.cos(avg_dec)
-    y = glx_ctr.dec - coord.dec
-    # azimuthal angle from coord to glx  -- not completely happy with this
-    phi = glx_PA - Angle("90d") + Angle(np.arctan(y.arcsec / x.arcsec), unit=u.rad)
-
-    # convert to coordinates in rotated frame, where y-axis is galaxy major
-    # ax; have to convert to arcmin b/c can't do sqrt(x^2+y^2) when x and y
-    # are angles
-    xp = (sky_radius * np.cos(phi.radian)).arcmin
-    yp = (sky_radius * np.sin(phi.radian)).arcmin
-
-    # de-project
-    ypp = yp / np.cos(glx_incl.radian)
-    obj_radius = np.sqrt(xp**2 + ypp**2)  # in arcmin
-    obj_dist = Distance(
-        Angle(obj_radius, unit=u.arcmin).radian * glx_dist, unit=glx_dist.unit
-    )
-
-    # Computing PA in disk (unused)
-    obj_phi = Angle(np.arctan(ypp / xp), unit=u.rad)
-    # TODO Zero out very small angles, i.e.
-    # if np.abs(Angle(xp, unit=u.arcmin)) < Angle(1e-5, unit=u.rad):
-    #     obj_phi = Angle(0.0)
-
-    return obj_dist
+correct_BG21_to_EFF = False  # whether to correct Brown & Gnedin 2021 radii to assume the EFF profile extrapolates beyond their aperture radius
 
 
 ids = []
@@ -96,10 +40,8 @@ sigma_1Ds = []
 
 compilation = Table()
 
-# %% [markdown]
 # # M82 clusters from Mayya 2008; Cuevas 2019,2021
 
-# %%
 # from 2021MNRAS.500.4422C supplementary files
 id = np.genfromtxt("tabla_1.dat", dtype=str, skip_header=1)[:, 0]
 data = np.genfromtxt("tabla_1.dat", skip_header=1)
@@ -109,8 +51,7 @@ Rh_error = (data[:, 9] + data[:, 10]) / 2
 Rh_error = Rh_error / Rh / np.log(10)
 Rh_king = data[:,]
 M = 10 ** data[:, 21]
-# print(M,Rh)
-# plt.loglog(M,Rh,ls="",marker='o')
+
 
 # model of M82 following Schneider 2018, fitting rotation curve to Greco 2012
 Rgc2, Vrot = np.loadtxt("M82_RGC_vs_Vrot.csv").T
@@ -118,9 +59,6 @@ Menc = Vrot**2 * Rgc2 * 2.32e5
 omega = Vrot / Rgc2
 kappa = np.sqrt(2 * omega / Rgc2 * np.gradient(Rgc2**2 * omega) / np.gradient(Rgc2))
 rho_tidal = 3 * (4 * omega**2 - kappa**2) / (4 * np.pi) * 2.325e-4
-
-from scipy.integrate import trapz
-
 Rgc3 = np.logspace(-1, 1, 100)
 R_stellar = 0.8
 M_stellar = 6e9
@@ -165,11 +103,8 @@ sigma_1Ds.append(
     np.repeat(np.nan, Ncl)
 )  # gas velocity dispersion profile not available; inclination too high
 
-# %% [markdown]
 # # M31 PHAT clusters
 # Here we cross-reference effective projected radii from 2015ApJ...802..127J and masses/ages from 2016ApJ...827...33J
-
-# %%
 system(
     "wget -N https://cdsarc.cds.unistra.fr/viz-bin/nph-Cat/fits?J/ApJ/802/127/table2.dat"
 )
@@ -197,8 +132,6 @@ m_min = 10 ** t2["b_logMass"]
 m_max = 10 ** t2["B_logMass"]
 reff = t1["Reff"] * dist * 1e3 * 4.484e-6
 reff = np.array([dict(zip(id1, reff))[i] for i in id2])
-
-print(np.median(reff))
 
 # below are values reported in Johnson 2016 Tables 1 and 2 for the different regions
 sigma_gasdict = {
@@ -241,7 +174,6 @@ sigma_SFR = [sigma_SFRdict[r] for r in region]  # for each cluster
 sigma_1D = [sigma_1Ddict[r] for r in region]  # for each cluster
 # STELLAR SURFACE DENSITY CALCULATION
 # lift stellar bulge+disk mass model from Tamm 2012A&A...546A...4T Table A.1, these are fits to the ellipsoidal Einasto model, rho = rho_c exp(-d_N ((a/a_c)^(1/N)-1)), where a = sqrt(r^2 + z^2/q^2)
-from scipy.integrate import quad
 
 sersic_params_bulge = (2.025, 0.73, 4.0, 11.67, 2.2e-1 * 1e9, 4.9)
 sersic_params_disk = (11.35, 0.1, 1.0, 2.67, 1.72e-2 * 1e9, 4.8)
@@ -461,9 +393,9 @@ for g in np.unique(galaxies):
     if not exists(g + "_R_vs_Vrot.csv"):
         continue
     model = t1["Mod"]
-    print(np.unique(model).data)
+    #    print(np.unique(model).data)
     mask = (
-        (model == b"K ") * (np.array(galaxies) == g) * np.isfinite(t1["Rh"])
+        (model == b"W ") * (np.array(galaxies) == g) * np.isfinite(t1["Rh"])
     )  # select King model fits
     ids.append(t1["Cluster"][mask])
     agedict = dict(zip(t2["Cluster"], 10 ** t2["logAge"]))
@@ -479,9 +411,7 @@ for g in np.unique(galaxies):
     ).T  # rotation curves from Alves 2000 for LMC and
 
     omega = Vrot / Rgc2
-    kappa = np.sqrt(
-        2 * omega / Rgc2 * np.gradient(Rgc2**2 * omega) / np.gradient(Rgc2)
-    )
+    kappa = np.sqrt(2 * omega / Rgc2 * np.gradient(Rgc2**2 * omega) / np.gradient(Rgc2))
     rho_tidal = 3 * (4 * omega**2 - kappa**2) / (4 * np.pi) * 2.325e-4
 
     R_sigma_star, sigma_star = np.loadtxt(
@@ -593,14 +523,10 @@ sigma_stars.append(sigma_star)
 sigma_1Ds.append(sigma_1D)
 DGCs.append(np.repeat(4500, len(mass)))  # Madore 2003
 
-# %% [markdown]
-# # galaxies from LEGUS catalogue and Brown & Gnedin 2021 fits
 
-# %%
+# # galaxies from LEGUS catalogue and Brown & Gnedin 2021 fits
 catalog = Table.read("cluster_sizes_brown_gnedin_21.txt", format="ascii.ecsv")
 
-from astropy import units as u
-from astropy.coordinates import SkyCoord
 
 galaxy_coords = {
     "ngc5194": (202.469583, 47.2),
@@ -801,6 +727,18 @@ for g in np.unique(catalog["galaxy"]):
     sigma_1D = np.interp(Rgc, Rgc3, sigma_1D)
 
     mcl, rcl = subset["mass_msun"], subset["r_eff_pc"]  # /0.75
+    if correct_BG21_to_EFF:
+        gamma = 2 * subset["power_law_slope"]
+        a = subset["scale_radius_pixels"]
+        pix_to_pc = subset["r_eff_pc"] / subset["r_eff_pixels"]
+        a *= pix_to_pc
+        rcl = np.array(
+            [
+                model_r50(g, scale_radius=s, model="EFF", cutoff_radius=np.inf)
+                for g, s in zip(gamma, a)
+            ]
+        )
+
     e_logm = np.log10(subset["mass_msun_max"] / subset["mass_msun_min"]) / 2
     e_logr = np.log10(subset["r_eff_pc_e+"] / subset["r_eff_pc_e-"]) / 2
     error_rho = np.sqrt((3 * e_logr) ** 2 + e_logm**2)
