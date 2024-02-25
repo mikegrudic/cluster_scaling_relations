@@ -4,6 +4,7 @@ from os.path import exists
 from astropy.coordinates import ICRS, Distance, Angle, SkyCoord
 from astropy.table import Table
 from astropy import units as u
+from pandas import read_csv
 import numpy as np
 from density_models import model_r50
 from scipy.integrate import trapz, quad
@@ -28,15 +29,34 @@ rotationcurve_data = []  # data file containing rotation curve data
 Vcs = []  # circular velocity at Rgc
 omegas = []  # orbital angular frequency = Vc/Rgc
 kappas = []  # epicyclic frequency
-rho_tidals = (
-    []
-)  # tidal density = 3 M / (4 pi r_J) where r_J = (G M / (4 omega^2 - kappa^2))
+rho_tidals = []
+# tidal density = 3 M / (4 pi r_J) where r_J = (G M / (4 omega^2 - kappa^2))
 sigma_gass = []  # gas surface density
 sigma_SFRs = []  # SFR surface density
 sigma_stars = []  # stellar surface density
 DGCs = []  # distance to galaxy in Mpc
 ages = []
 sigma_1Ds = []
+datalists = (
+    ids,
+    galaxy_name,
+    references,
+    masses,
+    reffs,
+    reff_error,
+    Rgcs,
+    regions,
+    Vcs,
+    omegas,
+    kappas,
+    rho_tidals,
+    sigma_gass,
+    sigma_SFRs,
+    sigma_stars,
+    DGCs,
+    ages,
+    sigma_1Ds,
+)
 
 compilation = Table()
 
@@ -351,11 +371,9 @@ DGCs.append(np.repeat(dist, cut.sum()))  # 2022ApJ...933..201L - 875 +/- 20kpc
 sigma_1Ds.append(np.array(sigma_1D)[cut])
 reff_error.append(np.zeros_like(reffs[-1]))
 
-# %% [markdown]
+
 # # Large and Small Magellanic Clouds
 # Data are from McLaughlin & van der Marel 2005; we adopt their King model fits. Rotation curve for SMC from di Teodoro 2018, LMC from Alves 2000
-
-# %%
 ##### SMC and LMC ###########################################################################################################################
 system(
     "wget -N https://cdsarc.cds.unistra.fr/viz-bin/nph-Cat/fits?J/ApJS/161/304/table11.dat"
@@ -393,7 +411,6 @@ for g in np.unique(galaxies):
     if not exists(g + "_R_vs_Vrot.csv"):
         continue
     model = t1["Mod"]
-    #    print(np.unique(model).data)
     mask = (
         (model == b"W ") * (np.array(galaxies) == g) * np.isfinite(t1["Rh"])
     )  # select King model fits
@@ -462,10 +479,61 @@ for g in np.unique(galaxies):
     else:
         sigma_1Ds.append(sigma_1D)  # Indu 2015A&A...573A.136I
 
-# %% [markdown]
+#### SMC from Gatto 2021 ################################################################
+data = read_csv("gatto_2021_SMC_table1.csv")
+Ncl = len(data)
+nans = np.repeat(np.nan, Ncl)
+for l in datalists:
+    l.append(nans)
+ids[-1] = data["ID"]
+ages[-1] = 10 ** data["logt"]
+masses[-1] = 10 ** data["Mass"]
+reffs[-1] = data["rh_king"]
+reff_error[-1] = data["rh_err_king"]
+galaxy_name[-1] = np.repeat("SMC", Ncl)
+references[-1] = np.repeat(
+    "2021MNRAS.507.3312G;2009MNRAS.395..342B;2019MNRAS.483..392D", Ncl
+)
+# bibcodes for references the data came from
+data2 = read_csv("gatto_2021_SMC_tableC1.csv")
+galaxy_name[-1] = np.repeat("SMC", Ncl)
+regions[-1] = data2["Tile"]  # galactic subregion designation (if any)
+# Vcs.append(nans)  # circular velocity at Rgc
+# omegas.append(nans)  # orbital angular frequency = Vc/Rgc
+# kappas.append(nans)  # epicyclic frequency
+# rho_tidals.append(nans)
+# DGCs.append(nans)
+# sigma_stars.append(nans)
+# sigma_gass.append(nans)
+# sigma_1Ds.append(nans)
+sigma_SFRs[-1] = np.repeat(sigma_SFR_dict["SMC"], Ncl)
+# ids = []
+# galaxy_name = []  # galaxy name
+# references = []  # bibcodes for references the data came from
+# masses = []  # best mass estimate
+# # mass_upper = [] # +1sigma mass quantile if available
+# # mass_lower = [] # -1sigma mass quantile if available
+# reffs = []  # projected effective (half light) radius
+# reff_error = []  # symmetrized 1sigma RELATIVE error in dex
+# # reff_lower = [] # -1sigma effective radius quantile if available
+# Rgcs = []  # galactocentric radius
+# regions = []  # galactic subregion designation (if any)
+# rotationcurve_data = []  # data file containing rotation curve data
+# Vcs = []  # circular velocity at Rgc
+# omegas = []  # orbital angular frequency = Vc/Rgc
+# kappas = []  # epicyclic frequency
+# rho_tidals = []
+# # tidal density = 3 M / (4 pi r_J) where r_J = (G M / (4 omega^2 - kappa^2))
+# sigma_gass = []  # gas surface density
+# sigma_SFRs = []  # SFR surface density
+# sigma_stars = []  # stellar surface density
+# DGCs = []  # distance to galaxy in Mpc
+# ages = []
+# sigma_1Ds = []
+
+
 # # M83 from Silva-Villa catalogue (Ryon 2015)
 
-# %%
 Rgc2, Vrot = np.loadtxt("M83_RGC_vs_Vc.csv").T  # Lundgren 2004
 omega = Vrot / Rgc2
 kappa = np.sqrt(2 * omega / Rgc2 * np.gradient(Rgc2**2 * omega) / np.gradient(Rgc2))
