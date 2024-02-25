@@ -1,19 +1,20 @@
 from astropy.table import Table
-from os import system
+from os import system, chdir
 from os.path import exists
 from astropy.coordinates import ICRS, Distance, Angle, SkyCoord
 from astropy.table import Table
 from astropy import units as u
 from pandas import read_csv
 import numpy as np
-from density_models import model_r50
 from scipy.integrate import trapz, quad
+from density_models import model_r50
+from astropy.io import ascii
 from correct_rgc import correct_rgc
 
 include_galaxies_without_env_data = True
 correct_BG21_to_EFF = False  # whether to correct Brown & Gnedin 2021 radii to assume the EFF profile extrapolates beyond their aperture radius
 
-
+chdir("data")
 ids = []
 galaxy_name = []  # galaxy name
 references = []  # bibcodes for references the data came from
@@ -126,11 +127,11 @@ sigma_1Ds.append(
 # # M31 PHAT clusters
 # Here we cross-reference effective projected radii from 2015ApJ...802..127J and masses/ages from 2016ApJ...827...33J
 system(
-    "wget -N https://cdsarc.cds.unistra.fr/viz-bin/nph-Cat/fits?J/ApJ/802/127/table2.dat"
+    "wget -N https://cdsarc.cds.unistra.fr/viz-bin/nph-Cat/fits?J/ApJ/802/127/table2.dat data"
 )
 t1 = Table.read("fits?J%2FApJ%2F802%2F127%2Ftable2.dat")
 system(
-    "wget -N https://cdsarc.cds.unistra.fr/viz-bin/nph-Cat/fits?J/ApJ/827/33/table4.dat"
+    "wget -N https://cdsarc.cds.unistra.fr/viz-bin/nph-Cat/fits?J/ApJ/827/33/table4.dat data"
 )
 t2 = Table.read("fits?J%2FApJ%2F827%2F33%2Ftable4.dat")
 dist = 761  # distance of 761+/-11 kpc - 2021ApJ...920...84L
@@ -259,11 +260,9 @@ DGCs.append(
 sigma_1Ds.append(np.array(sigma_1D)[cut])
 reff_error.append(np.zeros_like(reffs[-1]))
 
-# %% [markdown]
 # # M33 PHATTER clusters
 # Here we cross-reference effective projected radii from Johnson 2022 and masses/ages from Wainer 2022
 
-# %%
 t1 = Table.read("M33_Star_Cluster_Cat_with_CMD_Ests_2023Update_USE_THIS_ONE.fits")
 t2 = Table.read("Final_M33_catalog_with_CMD_Estimates.fits")
 dist = 875  # 2022ApJ...933..201L - 873 +/- 20kpc
@@ -376,16 +375,16 @@ reff_error.append(np.zeros_like(reffs[-1]))
 # Data are from McLaughlin & van der Marel 2005; we adopt their King model fits. Rotation curve for SMC from di Teodoro 2018, LMC from Alves 2000
 ##### SMC and LMC ###########################################################################################################################
 system(
-    "wget -N https://cdsarc.cds.unistra.fr/viz-bin/nph-Cat/fits?J/ApJS/161/304/table11.dat"
+    "wget -N https://cdsarc.cds.unistra.fr/viz-bin/nph-Cat/fits?J/ApJS/161/304/table11.dat data"
 )
 system(
-    "wget -N https://cdsarc.cds.unistra.fr/viz-bin/nph-Cat/fits?J/ApJS/161/304/table12.dat"
+    "wget -N https://cdsarc.cds.unistra.fr/viz-bin/nph-Cat/fits?J/ApJS/161/304/table12.dat data"
 )
 system(
-    "wget -N https://cdsarc.cds.unistra.fr/viz-bin/nph-Cat/fits?J/ApJS/161/304/table14.dat"
+    "wget -N https://cdsarc.cds.unistra.fr/viz-bin/nph-Cat/fits?J/ApJS/161/304/table14.dat data"
 )
 system(
-    "wget -N https://cdsarc.cds.unistra.fr/viz-bin/nph-Cat/fits?J/ApJS/161/304/table8.dat"
+    "wget -N https://cdsarc.cds.unistra.fr/viz-bin/nph-Cat/fits?J/ApJS/161/304/table8.dat data"
 )
 
 t1 = Table.read("J_ApJS_161_304_table11.dat.fits")
@@ -498,39 +497,28 @@ references[-1] = np.repeat(
 data2 = read_csv("gatto_2021_SMC_tableC1.csv")
 galaxy_name[-1] = np.repeat("SMC", Ncl)
 regions[-1] = data2["Tile"]  # galactic subregion designation (if any)
-# Vcs.append(nans)  # circular velocity at Rgc
-# omegas.append(nans)  # orbital angular frequency = Vc/Rgc
-# kappas.append(nans)  # epicyclic frequency
-# rho_tidals.append(nans)
-# DGCs.append(nans)
-# sigma_stars.append(nans)
-# sigma_gass.append(nans)
-# sigma_1Ds.append(nans)
 sigma_SFRs[-1] = np.repeat(sigma_SFR_dict["SMC"], Ncl)
-# ids = []
-# galaxy_name = []  # galaxy name
-# references = []  # bibcodes for references the data came from
-# masses = []  # best mass estimate
-# # mass_upper = [] # +1sigma mass quantile if available
-# # mass_lower = [] # -1sigma mass quantile if available
-# reffs = []  # projected effective (half light) radius
-# reff_error = []  # symmetrized 1sigma RELATIVE error in dex
-# # reff_lower = [] # -1sigma effective radius quantile if available
-# Rgcs = []  # galactocentric radius
-# regions = []  # galactic subregion designation (if any)
-# rotationcurve_data = []  # data file containing rotation curve data
-# Vcs = []  # circular velocity at Rgc
-# omegas = []  # orbital angular frequency = Vc/Rgc
-# kappas = []  # epicyclic frequency
-# rho_tidals = []
-# # tidal density = 3 M / (4 pi r_J) where r_J = (G M / (4 omega^2 - kappa^2))
-# sigma_gass = []  # gas surface density
-# sigma_SFRs = []  # SFR surface density
-# sigma_stars = []  # stellar surface density
-# DGCs = []  # distance to galaxy in Mpc
-# ages = []
-# sigma_1Ds = []
 
+# #### SMC from Hill & Zaritzsky 2006 ################################################################
+# data = read_csv("gatto_2021_SMC_table1.csv")
+# Ncl = len(data)
+# nans = np.repeat(np.nan, Ncl)
+# for l in datalists:
+#     l.append(nans)
+# ids[-1] = data["ID"]
+# ages[-1] = 10 ** data["logt"]
+# masses[-1] = 10 ** data["Mass"]
+# reffs[-1] = data["rh_king"]
+# reff_error[-1] = data["rh_err_king"]
+# galaxy_name[-1] = np.repeat("SMC", Ncl)
+# references[-1] = np.repeat(
+#     "2021MNRAS.507.3312G;2009MNRAS.395..342B;2019MNRAS.483..392D", Ncl
+# )
+# # bibcodes for references the data came from
+# data2 = read_csv("gatto_2021_SMC_tableC1.csv")
+# galaxy_name[-1] = np.repeat("SMC", Ncl)
+# regions[-1] = data2["Tile"]  # galactic subregion designation (if any)
+# sigma_SFRs[-1] = np.repeat(sigma_SFR_dict["SMC"], Ncl)
 
 # # M83 from Silva-Villa catalogue (Ryon 2015)
 
@@ -864,6 +852,6 @@ compilation["SigmaSFR"] = np.concatenate(sigma_SFRs)
 compilation["GalaxyDistance"] = np.concatenate(DGCs)
 compilation["SigmaGas1D"] = np.concatenate(sigma_1Ds)
 
-from astropy.io import ascii
 
+chdir("../")
 ascii.write(compilation, "Cluster_Compilation.dat", format="basic", overwrite=True)
