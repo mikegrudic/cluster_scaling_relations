@@ -375,16 +375,16 @@ reff_error.append(np.zeros_like(reffs[-1]))
 # Data are from McLaughlin & van der Marel 2005; we adopt their King model fits. Rotation curve for SMC from di Teodoro 2018, LMC from Alves 2000
 ##### SMC and LMC ###########################################################################################################################
 system(
-    "wget -N https://cdsarc.cds.unistra.fr/viz-bin/nph-Cat/fits?J/ApJS/161/304/table11.dat data"
+    "wget -N https://cdsarc.cds.unistra.fr/viz-bin/nph-Cat/fits?J/ApJS/161/304/table11.dat"
 )
 system(
-    "wget -N https://cdsarc.cds.unistra.fr/viz-bin/nph-Cat/fits?J/ApJS/161/304/table12.dat data"
+    "wget -N https://cdsarc.cds.unistra.fr/viz-bin/nph-Cat/fits?J/ApJS/161/304/table12.dat"
 )
 system(
-    "wget -N https://cdsarc.cds.unistra.fr/viz-bin/nph-Cat/fits?J/ApJS/161/304/table14.dat data"
+    "wget -N https://cdsarc.cds.unistra.fr/viz-bin/nph-Cat/fits?J/ApJS/161/304/table14.dat"
 )
 system(
-    "wget -N https://cdsarc.cds.unistra.fr/viz-bin/nph-Cat/fits?J/ApJS/161/304/table8.dat data"
+    "wget -N https://cdsarc.cds.unistra.fr/viz-bin/nph-Cat/fits?J/ApJS/161/304/table8.dat"
 )
 
 t1 = Table.read("J_ApJS_161_304_table11.dat.fits")
