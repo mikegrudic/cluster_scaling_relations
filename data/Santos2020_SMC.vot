@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VOTABLE version="1.4" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://www.ivoa.net/xml/VOTable/v1.3"
+  xsi:schemaLocation="http://www.ivoa.net/xml/VOTable/v1.3 http://www.ivoa.net/xml/VOTable/v1.3">
+ <DESCRIPTION>
+   VizieR Astronomical Server vizier.cds.unistra.fr
+    Date: 2024-02-26T00:05:40 [V7.33.2]
+   Explanations and Statistics of UCDs:			See LINK below
+   In case of problem, please report to:	cds-question@unistra.fr
+ </DESCRIPTION>
+<!-- VOTable description at http://www.ivoa.net/Documents/latest/VOT.html -->
+<INFO name="service_protocol" value="ASU">  IVOID of the protocol through which the data was retrieved</INFO>
+<INFO name="request_date" value="2024-02-26T00:05:40">  Query execution date</INFO>
+<INFO name="request" value="https://vizier.cds.unistra.fr/viz-bin/votable?-oc.form=dec&amp;-out.max=unlimited&amp;-out.all=2&amp;-c.eq=J2000&amp;-c.r=  2&amp;-c.u=arcmin&amp;-c.geom=r&amp;-source=J/MNRAS/498/205/table1&amp;-order=I&amp;-out=Name&amp;-out=f_Name&amp;-out=RAJ2000&amp;-out=DEJ2000&amp;-out=sigo&amp;-out=e_sigo&amp;-out=rc&amp;-out=e_rc&amp;-out=rt&amp;-out=e_rt&amp;-out.all=2&amp;-out=sigbg&amp;-out=e_sigbg&amp;-out=chi2King&amp;-out=a&amp;-out=e_a&amp;-out=gamma&amp;-out=e_gamma&amp;-out=chi2EFF&amp;-out=Vlim&amp;-out=SimbadName&amp;-out.all=2&amp;">  Full request URL (POST)</INFO>
+<INFO name="contact" value="cds-question@unistra.fr">  Email or URL to contact publisher</INFO>
+<INFO name="server_software" value="7.33.2">  Software version</INFO>
+<INFO name="publisher" value="CDS">  Data centre that produced the VOTable</INFO>
+
+<!--
+Execution Reports
+ -->
+
+<RESOURCE ID="yCat_74980205" name="J/MNRAS/498/205">
+  <DESCRIPTION>The VISCACHA survey II (Santos+, 2020)</DESCRIPTION>  <INFO name="ivoid" value="ivo://cds.vizier/j/mnras/498/205">    IVOID of underlying data collection  </INFO>
+  <INFO name="creator" value="Santos J.F.C.">    First author or institution  </INFO>
+  <INFO name="cites" value="bibcode:2020MNRAS.498..205S">    Article or Data origin sources  </INFO>
+  <INFO name="original_date" value="2020">    Year of the article publication  </INFO>
+  <INFO name="reference_url" value="https://cdsarc.cds.unistra.fr/viz-bin/cat/J/MNRAS/498/205">    Dataset landing page  </INFO>
+  <INFO name="publication_date" value="2023-11-03">    Date of first publication in the data centre  </INFO>
+  <INFO name="rights_uri" value="https://cds.unistra.fr/vizier-org/licences_vizier.html">    Licence URI  </INFO>
+
+  <COOSYS ID="J2000" system="eq_FK5" equinox="J2000"/>
+  <TABLE ID="J_MNRAS_498_205_table1" name="J/MNRAS/498/205/table1">
+    <DESCRIPTION>SMC clusters' structural parameters from RDPs</DESCRIPTION>
+    <!-- Definitions of GROUPs and FIELDs -->
+
+<!-- +++No column could be found to attach a LINK in table: J/MNRAS/498/205/table1 -->
+    <FIELD name="Name" ucd="meta.id;meta.main" datatype="char" arraysize="8*"><!-- ucd="ID_MAIN" -->
+      <DESCRIPTION>Cluster name</DESCRIPTION>
+      <LINK href="http://vizier.cds.unistra.fr/viz-bin/VizieR-4?-info=XML&amp;-out.add=.&amp;-source=J/MNRAS/498/205/table[13]&amp;Name=${Name}"/>
+    </FIELD>
+    <FIELD name="f_Name" ucd="meta.code" datatype="char" arraysize="1"><!-- ucd="CODE_MISC" -->
+      <DESCRIPTION>[*] Flag on Name (1)</DESCRIPTION>
+      <LINK href="http://vizier.cds.unistra.fr/viz-bin/VizieR?-6N&amp;-info=XML&amp;-out.add=.&amp;&amp;lt;&amp;quot;Note&amp;quot;&amp;catid=74980205&amp;notid=1&amp;-out.emph=${f_Name}"/>
+    </FIELD>
+    <FIELD name="RAJ2000" ucd="pos.eq.ra;meta.main" ref="J2000" datatype="char" arraysize="8" unit=""><!-- ucd="POS_EQ_RA_MAIN" -->
+      <DESCRIPTION>Right ascension (J2000)</DESCRIPTION>
+    </FIELD>
+    <FIELD name="DEJ2000" ucd="pos.eq.dec;meta.main" ref="J2000" datatype="char" arraysize="9" unit=""><!-- ucd="POS_EQ_DEC_MAIN" -->
+      <DESCRIPTION>Declination (J2000)</DESCRIPTION>
+    </FIELD>
+    <FIELD name="sigo" ucd="src.density" datatype="float" width="5" precision="2" unit="arcsec**-2"><!-- ucd="PHYS_DENSITY_SURFACE" -->
+      <DESCRIPTION>Central surface stellar density from King model fit (2)</DESCRIPTION>
+    </FIELD>
+    <FIELD name="e_sigo" ucd="stat.error" datatype="float" width="5" precision="2" unit="arcsec**-2"><!-- ucd="ERROR" -->
+      <DESCRIPTION>Error on sigo</DESCRIPTION>
+    </FIELD>
+    <FIELD name="rc" ucd="phys.angSize;src" datatype="short" width="2" unit="arcsec"><!-- ucd="EXTENSION_RAD" -->
+      <DESCRIPTION>Core radius from King model fit (2)</DESCRIPTION>
+    </FIELD>
+    <FIELD name="e_rc" ucd="stat.error" datatype="unsignedByte" width="1" unit="arcsec"><!-- ucd="ERROR" -->
+      <DESCRIPTION>Error on rc</DESCRIPTION>
+    </FIELD>
+    <FIELD name="rt" ucd="phys.angSize;src" datatype="short" width="3" unit="arcsec"><!-- ucd="EXTENSION_RAD" -->
+      <DESCRIPTION>Tidal radius from King model fit (2)</DESCRIPTION>
+    </FIELD>
+    <FIELD name="e_rt" ucd="stat.error" datatype="short" width="2" unit="arcsec"><!-- ucd="ERROR" -->
+      <DESCRIPTION>Error on rt</DESCRIPTION>
+    </FIELD>
+    <FIELD name="sigbg" ucd="src.density" datatype="float" width="6" precision="3" unit="arcsec**-2"><!-- ucd="PHYS_DENSITY_SURFACE" -->
+      <DESCRIPTION>Background stellar density</DESCRIPTION>
+    </FIELD>
+    <FIELD name="e_sigbg" ucd="stat.error" datatype="float" width="6" precision="3" unit="arcsec**-2"><!-- ucd="ERROR" -->
+      <DESCRIPTION>Error on sigbg</DESCRIPTION>
+    </FIELD>
+    <FIELD name="chi2King" ucd="stat.fit.chi2" datatype="float" width="5" precision="2"><!-- ucd="FIT_CHI2" -->
+      <DESCRIPTION>Reduced chi-squared for the King model fit</DESCRIPTION>
+    </FIELD>
+    <FIELD name="a" ucd="phys.angSize;src" datatype="short" width="2" unit="arcsec"><!-- ucd="EXTENSION_SC-LENGTH" -->
+      <DESCRIPTION>? Scale length related to the core radius from EFF model fit (3)</DESCRIPTION>
+      <VALUES null="-32768" />
+    </FIELD>
+    <FIELD name="e_a" ucd="stat.error" datatype="short" width="2" unit="arcsec"><!-- ucd="ERROR" -->
+      <DESCRIPTION>? Error on a</DESCRIPTION>
+      <VALUES null="-32768" />
+    </FIELD>
+    <FIELD name="gamma" ucd="src.morph.param" datatype="float" width="4" precision="1"><!-- ucd="MODEL_PARAM" -->
+      <DESCRIPTION>? {gamma} parameter probing the outermost cluster structure from EFF model fit (3)</DESCRIPTION>
+      <VALUES null="NaN" />
+    </FIELD>
+    <FIELD name="e_gamma" ucd="stat.error" datatype="float" width="4" precision="1"><!-- ucd="ERROR" -->
+      <DESCRIPTION>? Error on gamma</DESCRIPTION>
+      <VALUES null="NaN" />
+    </FIELD>
+    <FIELD name="chi2EFF" ucd="stat.fit.chi2" datatype="float" width="5" precision="2"><!-- ucd="FIT_CHI2" -->
+      <DESCRIPTION>? Reduced chi-squared for the EEF model fit</DESCRIPTION>
+      <VALUES null="NaN" />
+    </FIELD>
+    <FIELD name="Vlim" ucd="phot.mag;em.opt.V" datatype="float" width="5" precision="2" unit="mag"><!-- ucd="PHOT_MAG_V" -->
+      <DESCRIPTION>Peak value of the cluster plus field luminosity function</DESCRIPTION>
+    </FIELD>
+    <FIELD name="SimbadName" ucd="meta.id" datatype="char" arraysize="12*"><!-- ucd="ID_ALTERNATIVE" -->
+      <DESCRIPTION>Simbad column added by the CDS</DESCRIPTION>
+<!-- Designation understandable by the {\bf\fg{FireBrick}Simbad} data-base -->
+
+      <VALUES null=" " />
+      <LINK href="http://simbad.u-strasbg.fr/simbad/sim-id?Ident=${SimbadName}"/>
+    </FIELD>
+<DATA><TABLEDATA>
+<TR><TD>B1</TD><TD></TD><TD>00 19 20</TD><TD>-74 06 24</TD><TD>0.24</TD><TD>0.07</TD><TD>6</TD><TD>2</TD><TD>59</TD><TD>25</TD><TD>0.023</TD><TD>0.001</TD><TD>1.02</TD><TD>11</TD><TD>5</TD><TD>4.2</TD><TD>1.8</TD><TD>1.05</TD><TD>22.75</TD><TD>Bruck 1</TD></TR>
+<TR><TD>K6</TD><TD></TD><TD>00 25 27</TD><TD>-74 04 30</TD><TD>0.24</TD><TD>0.05</TD><TD>25</TD><TD>5</TD><TD>68</TD><TD>8</TD><TD>0.017</TD><TD>0.001</TD><TD>1.94</TD><TD>16</TD><TD>2</TD><TD>2.6</TD><TD>0.2</TD><TD>0.75</TD><TD>21.75</TD><TD>Cl Kron 6</TD></TR>
+<TR><TD>K7</TD><TD></TD><TD>00 27 45</TD><TD>-72 46 53</TD><TD>0.35</TD><TD>0.02</TD><TD>28</TD><TD>2</TD><TD>104</TD><TD>7</TD><TD>0.018</TD><TD>0.001</TD><TD>1.27</TD><TD>45</TD><TD>9</TD><TD>6.4</TD><TD>1.7</TD><TD>1.86</TD><TD>22.25</TD><TD>Cl Kron 7</TD></TR>
+<TR><TD>K9</TD><TD></TD><TD>00 30 00</TD><TD>-73 22 40</TD><TD>0.14</TD><TD>0.04</TD><TD>23</TD><TD>8</TD><TD>92</TD><TD>35</TD><TD>0.062</TD><TD>0.002</TD><TD>2.86</TD><TD>21</TD><TD>5</TD><TD>3.0</TD><TD>0.6</TD><TD>0.73</TD><TD>22.75</TD><TD>Cl Kron 9</TD></TR>
+<TR><TD>HW5</TD><TD></TD><TD>00 31 01</TD><TD>-72 20 30</TD><TD>0.46</TD><TD>0.04</TD><TD>8</TD><TD>1</TD><TD>192</TD><TD>35</TD><TD>0.020</TD><TD>0.001</TD><TD>0.70</TD><TD>10</TD><TD>1</TD><TD>2.9</TD><TD>0.2</TD><TD>0.96</TD><TD>22.75</TD><TD>HW5</TD></TR>
+<TR><TD>HW20</TD><TD></TD><TD>00 44 48</TD><TD>-74 21 47</TD><TD>0.19</TD><TD>0.03</TD><TD>18</TD><TD>4</TD><TD>56</TD><TD>7</TD><TD>0.070</TD><TD>0.002</TD><TD>0.46</TD><TD>13</TD><TD>4</TD><TD>3.4</TD><TD>0.9</TD><TD>0.91</TD><TD>23.25</TD><TD>HW20</TD></TR>
+<TR><TD>L32</TD><TD></TD><TD>00 47 24</TD><TD>-68 55 12</TD><TD>0.30</TD><TD>0.01</TD><TD>22</TD><TD>1</TD><TD>74</TD><TD>3</TD><TD>0.005</TD><TD>0.001</TD><TD>0.74</TD><TD>44</TD><TD>10</TD><TD>8.5</TD><TD>2.8</TD><TD>1.54</TD><TD>22.75</TD><TD>L32</TD></TR>
+<TR><TD>HW33</TD><TD></TD><TD>00 57 23</TD><TD>-70 48 36</TD><TD>0.06</TD><TD>0.01</TD><TD>12</TD><TD>4</TD><TD>70</TD><TD>24</TD><TD>0.007</TD><TD>0.001</TD><TD>0.90</TD><TD>19</TD><TD>5</TD><TD>4.2</TD><TD>1.0</TD><TD>0.33</TD><TD>21.75</TD><TD>HW33</TD></TR>
+<TR><TD>K37</TD><TD></TD><TD>00 57 49</TD><TD>-74 19 32</TD><TD>0.54</TD><TD>0.04</TD><TD>22</TD><TD>3</TD><TD>117</TD><TD>18</TD><TD>0.102</TD><TD>0.003</TD><TD>3.62</TD><TD>30</TD><TD>6</TD><TD>4.1</TD><TD>0.9</TD><TD>3.82</TD><TD>23.75</TD><TD>Cl Kron 37</TD></TR>
+<TR><TD>B94</TD><TD></TD><TD>00 58 17</TD><TD>-74 36 28</TD><TD>0.17</TD><TD>0.04</TD><TD>10</TD><TD>3</TD><TD>66</TD><TD>25</TD><TD>0.041</TD><TD>0.002</TD><TD>1.08</TD><TD>19</TD><TD>7</TD><TD>4.7</TD><TD>1.9</TD><TD>0.95</TD><TD>22.75</TD><TD>Bruck 94</TD></TR>
+<TR><TD>HW38</TD><TD></TD><TD>00 59 25</TD><TD>-73 49 01</TD><TD>0.21</TD><TD>0.04</TD><TD>14</TD><TD>4</TD><TD>75</TD><TD>29</TD><TD>0.094</TD><TD>0.003</TD><TD>1.65</TD><TD>6</TD><TD>1</TD><TD>1.8</TD><TD>0.1</TD><TD>0.45</TD><TD>22.75</TD><TD>HW38</TD></TR>
+<TR><TD>HW44</TD><TD></TD><TD>01 01 22</TD><TD>-73 47 12</TD><TD>0.15</TD><TD>0.03</TD><TD>16</TD><TD>5</TD><TD>90</TD><TD>38</TD><TD>0.091</TD><TD>0.003</TD><TD>1.35</TD><TD>9</TD><TD>5</TD><TD>1.6</TD><TD>0.3</TD><TD>1.39</TD><TD>22.75</TD><TD>HW44</TD></TR>
+<TR><TD>L73</TD><TD></TD><TD>01 04 25</TD><TD>-70 20 42</TD><TD>0.18</TD><TD>0.02</TD><TD>18</TD><TD>3</TD><TD>55</TD><TD>5</TD><TD>0.010</TD><TD>0.001</TD><TD>1.07</TD><TD>30</TD><TD>12</TD><TD>8.3</TD><TD>4.6</TD><TD>1.25</TD><TD>22.75</TD><TD>L73</TD></TR>
+<TR><TD>K55</TD><TD></TD><TD>01 07 33</TD><TD>-73 07 17</TD><TD>0.22</TD><TD>0.02</TD><TD>16</TD><TD>3</TD><TD>82</TD><TD>16</TD><TD>0.051</TD><TD>0.002</TD><TD>1.04</TD><TD>22</TD><TD>4</TD><TD>5.3</TD><TD>1.3</TD><TD>0.58</TD><TD>21.75</TD><TD>Cl Kron 55</TD></TR>
+<TR><TD>HW56</TD><TD></TD><TD>01 07 41</TD><TD>-70 56 04</TD><TD>0.21</TD><TD>0.02</TD><TD>14</TD><TD>2</TD><TD>49</TD><TD>3</TD><TD>0.011</TD><TD>0.001</TD><TD>1.38</TD><TD>7</TD><TD>2</TD><TD>2.3</TD><TD>0.3</TD><TD>0.96</TD><TD>22.25</TD><TD>HW56</TD></TR>
+<TR><TD>K57</TD><TD></TD><TD>01 08 14</TD><TD>-73 15 27</TD><TD>0.16</TD><TD>0.02</TD><TD>23</TD><TD>4</TD><TD>80</TD><TD>12</TD><TD>0.045</TD><TD>0.002</TD><TD>0.55</TD><TD>30</TD><TD>8</TD><TD>4.8</TD><TD>1.4</TD><TD>0.80</TD><TD>21.75</TD><TD>Cl Kron 57</TD></TR>
+<TR><TD>NGC422</TD><TD></TD><TD>01 09 25</TD><TD>-71 45 59</TD><TD>0.31</TD><TD>0.03</TD><TD>17</TD><TD>4</TD><TD>40</TD><TD>2</TD><TD>0.014</TD><TD>0.001</TD><TD>3.09</TD><TD>10</TD><TD>2</TD><TD>2.3</TD><TD>0.2</TD><TD>0.56</TD><TD>20.75</TD><TD>NGC422</TD></TR>
+<TR><TD>IC1641</TD><TD></TD><TD>01 09 40</TD><TD>-71 46 03</TD><TD>0.17</TD><TD>0.02</TD><TD>11</TD><TD>2</TD><TD>58</TD><TD>9</TD><TD>0.012</TD><TD>0.001</TD><TD>0.55</TD><TD>5</TD><TD>2</TD><TD>1.9</TD><TD>0.2</TD><TD>0.54</TD><TD>20.25</TD><TD>IC1641</TD></TR>
+<TR><TD>HW67</TD><TD></TD><TD>01 13 02</TD><TD>-70 57 47</TD><TD>0.28</TD><TD>0.04</TD><TD>7</TD><TD>1</TD><TD>100</TD><TD>23</TD><TD>0.015</TD><TD>0.001</TD><TD>1.17</TD><TD>12</TD><TD>3</TD><TD>3.5</TD><TD>0.6</TD><TD>1.06</TD><TD>22.75</TD><TD>HW67</TD></TR>
+<TR><TD>HW71NW</TD><TD></TD><TD>01 15 30</TD><TD>-72 22 36</TD><TD>0.12</TD><TD>0.03</TD><TD>9</TD><TD>2</TD><TD>58</TD><TD>16</TD><TD>0.015</TD><TD>0.001</TD><TD>1.65</TD><TD>6</TD><TD>4</TD><TD>2.4</TD><TD>0.6</TD><TD>1.43</TD><TD>21.25</TD><TD>NAME HW 71NW</TD></TR>
+<TR><TD>L100</TD><TD></TD><TD>01 18 16</TD><TD>-72 00 06</TD><TD>0.42</TD><TD>0.03</TD><TD>11</TD><TD>1</TD><TD>91</TD><TD>10</TD><TD>0.018</TD><TD>0.001</TD><TD>1.04</TD><TD>19</TD><TD>3</TD><TD>4.4</TD><TD>0.6</TD><TD>1.23</TD><TD>22.25</TD><TD>L100</TD></TR>
+<TR><TD>HW77</TD><TD></TD><TD>01 20 10</TD><TD>-72 37 12</TD><TD>0.15</TD><TD>0.03</TD><TD>30</TD><TD>5</TD><TD>85</TD><TD>11</TD><TD>0.041</TD><TD>0.002</TD><TD>0.50</TD><TD>35</TD><TD>10</TD><TD>4.5</TD><TD>1.4</TD><TD>0.83</TD><TD>23.25</TD><TD>HW77</TD></TR>
+<TR><TD>IC1708</TD><TD></TD><TD>01 24 56</TD><TD>-71 11 00</TD><TD>0.29</TD><TD>0.02</TD><TD>14</TD><TD>1</TD><TD>97</TD><TD>8</TD><TD>0.007</TD><TD>0.001</TD><TD>0.45</TD><TD>15</TD><TD>2</TD><TD>3.6</TD><TD>0.4</TD><TD>1.46</TD><TD>22.25</TD><TD>IC1708</TD></TR>
+<TR><TD>B168</TD><TD></TD><TD>01 26 43</TD><TD>-70 46 48</TD><TD>0.20</TD><TD>0.03</TD><TD>8</TD><TD>1</TD><TD>99</TD><TD>17</TD><TD>0.009</TD><TD>0.001</TD><TD>0.45</TD><TD>13</TD><TD>3</TD><TD>3.6</TD><TD>0.5</TD><TD>0.63</TD><TD>22.75</TD><TD>Bruck 168</TD></TR>
+<TR><TD>L106</TD><TD></TD><TD>01 30 38</TD><TD>-76 03 18</TD><TD>0.16</TD><TD>0.01</TD><TD>21</TD><TD>3</TD><TD>102</TD><TD>10</TD><TD>0.003</TD><TD>0.001</TD><TD>1.30</TD><TD>40</TD><TD>7</TD><TD>6.3</TD><TD>1.3</TD><TD>1.29</TD><TD>22.25</TD><TD>L106</TD></TR>
+<TR><TD>BS95-187</TD><TD></TD><TD>01 31 01</TD><TD>-72 50 48</TD><TD>0.08</TD><TD>0.02</TD><TD>6</TD><TD>1</TD><TD>43</TD><TD>5</TD><TD>0.002</TD><TD>0.000</TD><TD>0.55</TD><TD>6</TD><TD>3</TD><TD>2.6</TD><TD>0.6</TD><TD>0.59</TD><TD>21.25</TD><TD>[BS95] 187</TD></TR>
+<TR><TD>L112</TD><TD>*</TD><TD>01 36 01</TD><TD>-75 27 30</TD><TD>0.14</TD><TD>0.01</TD><TD>17</TD><TD>3</TD><TD>81</TD><TD>10</TD><TD>0.005</TD><TD>0.001</TD><TD>0.71</TD><TD>25</TD><TD>5</TD><TD>4.6</TD><TD>1.0</TD><TD>1.04</TD><TD>22.75</TD><TD>L112</TD></TR>
+<TR><TD>HW85</TD><TD></TD><TD>01 42 28</TD><TD>-71 16 48</TD><TD>0.21</TD><TD>0.02</TD><TD>12</TD><TD>2</TD><TD>63</TD><TD>8</TD><TD>0.008</TD><TD>0.001</TD><TD>1.01</TD><TD>20</TD><TD>4</TD><TD>5.9</TD><TD>1.5</TD><TD>0.93</TD><TD>23.25</TD><TD>HW85</TD></TR>
+<TR><TD>L114</TD><TD></TD><TD>01 50 19</TD><TD>-74 21 24</TD><TD>0.40</TD><TD>0.03</TD><TD>9</TD><TD>1</TD><TD>87</TD><TD>5</TD><TD>0.004</TD><TD>0.001</TD><TD>0.56</TD><TD>14</TD><TD>1</TD><TD>3.6</TD><TD>0.2</TD><TD>0.38</TD><TD>21.75</TD><TD>L114</TD></TR>
+<TR><TD>L116</TD><TD>*</TD><TD>01 55 33</TD><TD>-77 39 18</TD><TD>0.16</TD><TD>0.01</TD><TD>16</TD><TD>2</TD><TD>109</TD><TD>14</TD><TD>0.002</TD><TD>0.001</TD><TD>1.53</TD><TD>18</TD><TD>4</TD><TD>3.3</TD><TD>0.5</TD><TD>2.08</TD><TD>22.75</TD><TD>L116</TD></TR>
+<TR><TD>NGC796</TD><TD></TD><TD>01 56 44</TD><TD>-74 13 12</TD><TD>0.36</TD><TD>0.05</TD><TD>8</TD><TD>1</TD><TD>99</TD><TD>7</TD><TD>0.002</TD><TD>0.001</TD><TD>0.36</TD><TD>13</TD><TD>1</TD><TD>3.5</TD><TD>0.2</TD><TD>0.49</TD><TD>21.75</TD><TD>NGC796</TD></TR>
+<TR><TD>AM3</TD><TD></TD><TD>23 48 59</TD><TD>-72 56 42</TD><TD>0.11</TD><TD>0.01</TD><TD>11</TD><TD>2</TD><TD>66</TD><TD>4</TD><TD>0.002</TD><TD>0.001</TD><TD>0.23</TD><TD>11</TD><TD>2</TD><TD>3.1</TD><TD>0.3</TD><TD>1.08</TD><TD>22.75</TD><TD>AM3</TD></TR>
+</TABLEDATA></DATA>
+</TABLE>
+<INFO name="matches" value="32">matching records</INFO>
+
+<INFO name="Warning" value="No center provided++++"/>
+<INFO name="Warning" value="skip recno in all column selection"/>
+</RESOURCE>
+</VOTABLE>

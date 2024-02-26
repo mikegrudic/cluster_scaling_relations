@@ -499,26 +499,6 @@ galaxy_name[-1] = np.repeat("SMC", Ncl)
 regions[-1] = data2["Tile"]  # galactic subregion designation (if any)
 sigma_SFRs[-1] = np.repeat(sigma_SFR_dict["SMC"], Ncl)
 
-# #### SMC from Hill & Zaritzsky 2006 ################################################################
-# data = read_csv("gatto_2021_SMC_table1.csv")
-# Ncl = len(data)
-# nans = np.repeat(np.nan, Ncl)
-# for l in datalists:
-#     l.append(nans)
-# ids[-1] = data["ID"]
-# ages[-1] = 10 ** data["logt"]
-# masses[-1] = 10 ** data["Mass"]
-# reffs[-1] = data["rh_king"]
-# reff_error[-1] = data["rh_err_king"]
-# galaxy_name[-1] = np.repeat("SMC", Ncl)
-# references[-1] = np.repeat(
-#     "2021MNRAS.507.3312G;2009MNRAS.395..342B;2019MNRAS.483..392D", Ncl
-# )
-# # bibcodes for references the data came from
-# data2 = read_csv("gatto_2021_SMC_tableC1.csv")
-# galaxy_name[-1] = np.repeat("SMC", Ncl)
-# regions[-1] = data2["Tile"]  # galactic subregion designation (if any)
-# sigma_SFRs[-1] = np.repeat(sigma_SFR_dict["SMC"], Ncl)
 
 # # M83 from Silva-Villa catalogue (Ryon 2015)
 
