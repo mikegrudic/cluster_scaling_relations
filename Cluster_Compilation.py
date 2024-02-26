@@ -411,7 +411,7 @@ for g in np.unique(galaxies):
         continue
     model = t1["Mod"]
     mask = (
-        (model == b"W ") * (np.array(galaxies) == g) * np.isfinite(t1["Rh"])
+        (model == b" K") * (np.array(galaxies) == g) * np.isfinite(t1["Rh"])
     )  # select King model fits
     ids.append(t1["Cluster"][mask])
     agedict = dict(zip(t2["Cluster"], 10 ** t2["logAge"]))
@@ -498,7 +498,7 @@ data2 = read_csv("gatto_2021_SMC_tableC1.csv")
 galaxy_name[-1] = np.repeat("SMC", Ncl)
 regions[-1] = data2["Tile"]  # galactic subregion designation (if any)
 sigma_SFRs[-1] = np.repeat(sigma_SFR_dict["SMC"], Ncl)
-
+DGCs[-1] = np.repeat(dist_dict["SMC"], Ncl)
 
 # # M83 from Silva-Villa catalogue (Ryon 2015)
 
@@ -515,11 +515,9 @@ cut = e_Reff < 1  # no meaningful constraint on Reff
 data = data[cut]
 gamma = data["Eta"] * 2
 # data = data[gamma>2.6] # eliminate shallow profiles with unreliable radii as in Ryon 2015
-# gamma = data["Eta"]*2
 e_gamma = data["e_Eta"] * 2
 e_Reff = data["e_logReff"]
 age = data["logAge"]
-# data = data[cut]
 age = 10 ** data["logAge"]
 mass = 10 ** data["logMass"]
 mmin = 10 ** data["b_logMass"]

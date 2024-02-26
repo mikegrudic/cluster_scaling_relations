@@ -12,7 +12,7 @@ from astropy import table
 import matplotlib.pyplot as plt
 import numpy as np
 
-catalog = table.Table.read("../cluster_sizes_brown_gnedin_21.txt", format="ascii.ecsv")
+catalog = table.Table.read("../data/cluster_sizes_brown_gnedin_21.txt", format="ascii.ecsv")
 
 # # Conditions for the Brick: M=1.3e5, R=2.9 (Longmore 2012), T = 27K
 # sigma_brick = (1.3e5 * 0.5 / (np.pi * (2.9)**2))
@@ -25,7 +25,7 @@ catalog = table.Table.read("../cluster_sizes_brown_gnedin_21.txt", format="ascii
 
 from astropy.io.votable import parse_single_table
 
-table = parse_single_table("clumpdata/Urquhart_2018_atlasgal_clumps.vot")
+table = parse_single_table("../clumpdata/Urquhart_2018_atlasgal_clumps.vot")
 # data = table
 stage = table.array["EvolType"]
 # for s in np.unique(stage):
@@ -54,10 +54,10 @@ for n in "12", "13":
     # mbranch = []
     # rbranch = []
     for name in GMC_names:
-        leaves = np.int_(np.loadtxt("clumpdata/" + name + "_%s_leaves.txt" % n))
-        branches = np.int_(np.loadtxt("clumpdata/" + name + "_%s_branches.txt" % n))
-        print("clumpdata/" + name + "_%s_physprop_add.txt" % n)
-        data = np.loadtxt("clumpdata/" + name + "_%s_physprop_add.txt" % n)
+        leaves = np.int_(np.loadtxt("../clumpdata/" + name + "_%s_leaves.txt" % n))
+        branches = np.int_(np.loadtxt("../clumpdata/" + name + "_%s_branches.txt" % n))
+        print("../clumpdata/" + name + "_%s_physprop_add.txt" % n)
+        data = np.loadtxt("../clumpdata/" + name + "_%s_physprop_add.txt" % n)
         mleaves.append(data[leaves, 8])
         rleaves.append(data[leaves, 2])
         mbranch.append(data[branches, 8])
@@ -78,11 +78,11 @@ ax.scatter(
 # ax.scatter(mbranch,rbranch,s=1,label=r"Wong 2019 LMC $^{%s}$CO (Branch)"%n,marker='*')
 
 # FKM points
-m, r = np.loadtxt("clumpdata/FKM2010_clumps_red.csv").T
+m, r = np.loadtxt("../clumpdata/FKM2010_clumps_red.csv").T
 ax.scatter(m, r, s=2, marker="s", label="Shirley 2003 (CS)")
-m, r = np.loadtxt("clumpdata/FKM2010_clumps_black.csv").T
+m, r = np.loadtxt("../clumpdata/FKM2010_clumps_black.csv").T
 ax.scatter(m, r, s=2, marker="o", label=r"Fontani 2005 (C$^{17}$O, dust)")
-m, rho = np.loadtxt("clumpdata/Faundez_2004_clumps.txt").T
+m, rho = np.loadtxt("../clumpdata/Faundez_2004_clumps.txt").T
 r = (3 * m / (4 * np.pi * rho)) ** (1.0 / 3)
 r *= 10**0.4 / r.max()  # correcting to definition of radius used in Faundez
 ax.scatter(m, r, marker="^", label="Faundez 2004 (dust)", s=4)
