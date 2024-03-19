@@ -5,11 +5,11 @@ from pandas import read_csv
 import palettable
 
 datasets = [
-    "MvdM05 (Local Group)",
-    "Ryon+15 (M83)",
-    "Ryon+17 (NGC 628,1313)",
+    # "MvdM05 (Local Group)",
+    # "Ryon+15 (M83)",
+    # "Ryon+17 (NGC 628,1313)",
     "BG21 (LEGUS)",
-    "Gatto+21 (SMC)",
+    # "Gatto+21 (SMC)",
 ]
 DATA_PATH = "../data/"
 
@@ -104,7 +104,7 @@ plt.clf()
 
 fig, ax = plt.subplots(figsize=(4, 4))
 ax.set_prop_cycle("color", palettable.cartocolors.qualitative.Bold_5.mpl_colors)
-gamma_bins = np.linspace(1, 5, 13)
+gamma_bins = np.linspace(1, 6, 16)
 for d in datasets:
     data = get_gamma_values(d)
     gammas = []
@@ -114,9 +114,14 @@ for d in datasets:
         gammas.append(gamma)
     gammas = np.concatenate(gammas)
     ax.hist(
-        gammas, gamma_bins, label=d, alpha=0.5, density=True
+        gammas,
+        gamma_bins,
+        label=d,
+        density=True,
+        color="black",
+        histtype="step",
     )  # gal.upper() + f" ({d})")
 
 ax.legend(labelspacing=0)
-ax.set(xlim=[1, 5], xlabel=r"$\gamma$", ylabel=r"Fraction $<\gamma$")
+ax.set(xlim=[1, 6], xlabel=r"$\gamma$", ylabel=r"Fraction $<\gamma$")
 plt.savefig("Gamma_PDF.png", dpi=800)

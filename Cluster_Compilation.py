@@ -12,7 +12,7 @@ from astropy.io import ascii
 from correct_rgc import correct_rgc
 
 include_galaxies_without_env_data = True
-correct_BG21_to_EFF = False  # whether to correct Brown & Gnedin 2021 radii to assume the EFF profile extrapolates beyond their aperture radius
+correct_BG21_to_EFF = True  # whether to correct Brown & Gnedin 2021 radii to assume the EFF profile extrapolates beyond their aperture radius
 
 chdir("data")
 ids = []
@@ -407,11 +407,12 @@ sigma_gas = np.gradient(menc) / np.gradient(np.pi * r**2) / 1e6
 np.savetxt("SMC_R_vs_SigmaGas.csv", np.c_[r, sigma_gas])
 
 for g in np.unique(galaxies):
+    print(g)
     if not exists(g + "_R_vs_Vrot.csv"):
         continue
     model = t1["Mod"]
     mask = (
-        (model == b" K") * (np.array(galaxies) == g) * np.isfinite(t1["Rh"])
+        (model == b"PL") * (np.array(galaxies) == g) * np.isfinite(t1["Rh"])
     )  # select King model fits
     ids.append(t1["Cluster"][mask])
     agedict = dict(zip(t2["Cluster"], 10 ** t2["logAge"]))
@@ -832,4 +833,8 @@ compilation["SigmaGas1D"] = np.concatenate(sigma_1Ds)
 
 
 chdir("../")
-ascii.write(compilation, "Cluster_Compilation.dat", format="basic", overwrite=True)
+if correct_BG21_to_EFF:
+    fname = "Cluster_Compilation_EFFcorr.dat"
+else:
+    fname = "Cluster_Compilation.dat"
+ascii.write(compilation, fname, format="basic", overwrite=True)
